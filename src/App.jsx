@@ -123,7 +123,7 @@ function App() {
           ref={popup}
           className='absolute flex justify-center items-center  w-full h-[100vh] backdrop-blur-lg bg-black bg-opacity-50 z-30'
         >
-          <section className=' relative  '>
+          <section className='lg:w-1/3 relative  '>
             <FontAwesomeIcon
               onClick={() => {
                 window.scrollTo(0, scrollPosition);
