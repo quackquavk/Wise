@@ -20,7 +20,7 @@ function Register({ changeRegisterDivState }) {
     <div className=' bg-white flex flex-col shadow-md items-center mt-10 text-need-dark-green p-48 relative'>
       <FontAwesomeIcon
         onClick={changeRegisterDivState}
-        className='absolute sm:top-10 sm:right-10 right-32 top-20 text-xl hover:cursor-pointer'
+        className='absolute sm:top-10 sm:right-10 right-36 top-20 text-xl hover:cursor-pointer'
         icon={faXmark}
       />
       <h1 className='font-bold text-lg'>Register</h1>
