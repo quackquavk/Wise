@@ -26,7 +26,7 @@ const LogIn = React.forwardRef(({ changeLoginDivState }, ref) => {
         onClick={() => {
           changeLoginDivState(false);
         }}
-        className='absolute sm:top-10 sm:right-10 top-20 right-36 text-xl hover:cursor-pointer'
+        className='absolute sm:top-10 sm:right-10 top-20 right-44 text-xl hover:cursor-pointer'
         icon={faXmark}
       />
       <h1 className='font-bold text-lg'>Log In</h1>
