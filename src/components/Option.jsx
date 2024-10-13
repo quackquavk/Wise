@@ -42,7 +42,7 @@ function Option() {
         {featuresStatus && (
           <div className='flex flex-col items-start'>
             <Button className='bg-white text-need-dark-green shadow-none mb-5'>
-              Multi-currency acoount
+              Multi-currency account
             </Button>
             <Button className='bg-white text-need-dark-green shadow-none mb-5'>
               Money Transfers
