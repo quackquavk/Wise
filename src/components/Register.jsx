@@ -8,13 +8,21 @@ function Register({ changeRegisterDivState }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const handleSubmit = async () => {
-    await docreateUserwithEmailandPw(email, password);
-    changeRegisterDivState();
+    try {
+      await docreateUserwithEmailandPw(email, password);
+      changeRegisterDivState();
+    } catch (error) {
+      console.error('register failed', error);
+    }
   };
   const handleSignInWithGoogle = async (e) => {
     e.preventDefault();
-    await dosignInwithGoogle();
-    changeLoginDivState();
+    try {
+      await dosignInwithGoogle();
+      changeRegisterDivState();
+    } catch (error) {
+      console.error('Register failed', error);
+    }
   };
   return (
     <div className=' bg-white flex flex-col shadow-md items-center mt-10 text-need-dark-green p-48 relative'>

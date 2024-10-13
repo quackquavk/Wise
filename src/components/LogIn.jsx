@@ -10,12 +10,20 @@ const LogIn = React.forwardRef(({ changeLoginDivState }, ref) => {
   const [password, setPassword] = useState('');
   const { userLoggedIn } = useAuth();
   const handleSubmit = async () => {
-    await dosignInwithEmailandPw(email, password);
-    changeLoginDivState(false);
+    try {
+      await dosignInwithEmailandPw(email, password);
+      changeLoginDivState(false);
+    } catch (error) {
+      console.error('LogIn failed', error);
+    }
   };
   const handleSignInWithGoogle = async () => {
-    await dosignInwithGoogle();
-    changeLoginDivState(false);
+    try {
+      await dosignInwithGoogle();
+      changeLoginDivState(false);
+    } catch (error) {
+      console.error('Login failed', error);
+    }
   };
   return (
     <div
