@@ -107,7 +107,11 @@ function App() {
 
   return (
     <section className='relative'>
-      {optionStatus && <Option changeOptionDivState={changeOptionDivState} />}
+      {optionStatus && (
+        <LogContext.Provider value={LogValues}>
+          <Option />
+        </LogContext.Provider>
+      )}
       {loginDiv && (
         <div
           ref={scrollLogin}

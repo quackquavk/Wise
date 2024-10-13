@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button } from './ui/button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { LogContext } from '@/App';
 
-function Option({ changeOptionDivState }) {
+function Option() {
   const [featuresStatus, setfeaturesStatus] = useState(false);
+  const { changeLoginDivState, changeRegisterDivState, changeOptionDivState } =
+    useContext(LogContext);
   return (
     <div className='absolute px-10 flex flex-col  h-[100vh] items-start w-full bg-white z-20'>
       <div className='flex'>
@@ -56,11 +59,23 @@ function Option({ changeOptionDivState }) {
           Help
         </Button>
       </article>
-      <Button className=' mb-5 w-full bg-white shadow-none text-need-dark-green border-2 border-need-dark-green p-3 h-12'>
+      <Button
+        onClick={() => {
+          changeOptionDivState(false);
+          changeLoginDivState(true);
+        }}
+        className=' mb-5 w-full bg-white shadow-none text-need-dark-green border-2 border-need-dark-green p-3 h-12'
+      >
         Log In
       </Button>
 
-      <Button className='w-full bg-need-light-green shadow-none text-need-dark-green  p-3 h-12'>
+      <Button
+        onClick={() => {
+          changeOptionDivState(false);
+          changeRegisterDivState(true);
+        }}
+        className='w-full bg-need-light-green shadow-none text-need-dark-green  p-3 h-12'
+      >
         Register
       </Button>
     </div>
