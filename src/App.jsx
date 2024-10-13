@@ -121,9 +121,9 @@ function App() {
       {selectedItem && (
         <div
           ref={popup}
-          className='absolute flex justify-center items-center w-full h-[100vh] backdrop-blur-lg bg-black bg-opacity-50 z-30'
+          className='absolute flex justify-center items-center  w-full h-[100vh] backdrop-blur-lg bg-black bg-opacity-50 z-30'
         >
-          <section className='w-1/3 relative  '>
+          <section className=' relative  '>
             <FontAwesomeIcon
               onClick={() => {
                 window.scrollTo(0, scrollPosition);
