@@ -16,7 +16,7 @@ import { doSignOut } from './auth';
 import { useAuth } from './authContext';
 function NavBar() {
   const { currentUser, userLoggedIn } = useAuth();
-  const { changeLoginDivState, changeRegisterDivState } =
+  const { changeLoginDivState, changeRegisterDivState, changeOptionDivState } =
     useContext(LogContext);
   return (
     <div className='lg:w-4/5 w-full  p-5 lg:pl-5 pr-0 pl-0 sm:max-lg:left-0 sm:max-lg:pl-10 flex items-center  absolute lg:left-auto top-1 z-15'>
@@ -24,6 +24,9 @@ function NavBar() {
         Wise
       </h1>
       <FontAwesomeIcon
+        onClick={() => {
+          changeOptionDivState(true);
+        }}
         className=' absolute hover:cursor-pointer sm:max-lg:right-6 right-20 text-need-light-green lg:invisible'
         icon={faBars}
       />

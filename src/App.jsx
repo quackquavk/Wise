@@ -11,6 +11,7 @@ import LogIn from './components/LogIn';
 import Register from './components/Register';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import Option from './components/Option';
 export const LogContext = createContext(null);
 function App() {
   const [data, setdata] = useState([]);
@@ -18,6 +19,7 @@ function App() {
   const [registerDiv, setregisterDiv] = useState(false);
   const [selectedItem, setselectedItem] = useState(null);
   const [scrollPosition, setscrollPosition] = useState(0);
+  const [optionStatus, setOptionStatus] = useState(false);
   const url = 'https://jsonplaceholder.typicode.com/posts';
   const scrollLogin = useRef(null);
   const popup = useRef(null);
@@ -94,13 +96,18 @@ function App() {
   const changeRegisterDivState = () => {
     setregisterDiv(!registerDiv);
   };
+  const changeOptionDivState = (state) => {
+    setOptionStatus(state);
+  };
   const LogValues = {
     changeLoginDivState,
     changeRegisterDivState,
+    changeOptionDivState,
   };
 
   return (
     <section className='relative'>
+      {optionStatus && <Option changeOptionDivState={changeOptionDivState} />}
       {loginDiv && (
         <div
           ref={scrollLogin}
