@@ -33,7 +33,7 @@ function SideBox({ changeLoginDivState, updateData }) {
             alt=''
             className='w-24 mb-5'
           />
-          <h1 className='text-need-light-green font-bold text-2xl '>
+          <h1 className='text-need-light-green font-bold sm:text-2xl text-lg '>
             Share your ideas!
           </h1>
           <p className='text-white mt-5'>
@@ -103,12 +103,12 @@ function SideBox({ changeLoginDivState, updateData }) {
           <img
             src='https://wise.com/web-art/assets/illustrations/light-bulb-medium@1x.webp'
             alt=''
-            className='w-24'
+            className='sm:w-24 w-16'
           />
-          <h1 className='text-need-light-green font-bold text-2xl '>
+          <h1 className='text-need-light-green font-bold sm:text-2xl text-lg '>
             Share your ideas!
           </h1>
-          <p className='text-white mt-5'>
+          <p className='text-white mt-5 sm:text-base text-xs'>
             Have an idea to improve our product? Share it with our product team.
             <br />
             <br />
@@ -118,7 +118,7 @@ function SideBox({ changeLoginDivState, updateData }) {
             onClick={() => {
               changeLoginDivState(true);
             }}
-            className='bg-need-light-green text-need-dark-green mt-5 mb-1 p-6 text-md  hover:brightness-125'
+            className='bg-need-light-green text-need-dark-green mt-5 mb-1 sm:p-6 text-md sm:w-auto sm:h-auto w-18 p-2 hover:brightness-125'
           >
             Log In
           </Button>

@@ -114,7 +114,7 @@ function Box({ changeLoginDivState, DivpopUp, item, voteup, votedown }) {
             <FontAwesomeIcon className='text-center ' icon={faAngleDown} />
           </Toggle>
         </div>
-        <h1 className='mt-10 mr-2 ml-4 text-sm text-white font-medium '>
+        <h1 className='mt-10 mr-2 ml-4  text-xs sm:text-base text-white font-medium '>
           {vote}
         </h1>
       </section>
@@ -124,8 +124,8 @@ function Box({ changeLoginDivState, DivpopUp, item, voteup, votedown }) {
         }}
         className='p-5 pb-10 '
       >
-        <h1 className='font-bold mt-5 '>{title}</h1>
-        <p className='mt-5'>{body}</p>
+        <h1 className='font-bold text-xs sm:text-base mt-5 '>{title}</h1>
+        <p className=' sm:text-base text-xs mt-5'>{body}</p>
       </section>
     </div>
   );
