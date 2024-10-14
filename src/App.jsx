@@ -99,6 +99,12 @@ function App() {
   const changeOptionDivState = (state) => {
     setOptionStatus(state);
   };
+  const updateData = (id, title, body, vote = 0) => {
+    setdata((prevData) => [
+      ...prevData,
+      { id: id, title: title, body: body, vote: vote },
+    ]);
+  };
   const LogValues = {
     changeLoginDivState,
     changeRegisterDivState,
@@ -178,7 +184,10 @@ function App() {
           })}
         </section>
         <div className=' md:max-lg:pb-4 bg-need-dark-green w-[400px] px-5 ml-10  py-5 rounded-[45px] h-[26rem]'>
-          <SideBox changeLoginDivState={changeLoginDivState} />
+          <SideBox
+            updateData={updateData}
+            changeLoginDivState={changeLoginDivState}
+          />
         </div>
       </div>
     </section>

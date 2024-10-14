@@ -97,7 +97,7 @@ function Box({ changeLoginDivState, DivpopUp, item, voteup, votedown }) {
       key={id}
       className='flex rounded-3xl bg-need-bg-box hover:bg-need-light-green transition-colors duration-700 ease-in-out hover:cursor-pointer mb-10'
     >
-      <section className='rounded-tl-3xl rounded-bl-3xl w-48 flex justify-center p-2  bg-need-dark-green '>
+      <section className='rounded-tl-3xl rounded-bl-3xl w-36 flex justify-center p-2  bg-need-dark-green '>
         <div>
           <Toggle
             data-state={datastateup}

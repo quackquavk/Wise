@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from './ui/button';
 
 import { Input } from './ui/input';
@@ -16,8 +16,14 @@ import {
 
 import { useAuth } from './authContext';
 
-function SideBox({ changeLoginDivState }) {
+function SideBox({ changeLoginDivState, updateData }) {
   const { userLoggedIn } = useAuth();
+  const [input, setInput] = useState('');
+  const [text, setText] = useState('');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    updateData(new Date().getTime().toString(), input, text);
+  };
   return (
     <>
       {userLoggedIn && (
@@ -39,34 +45,53 @@ function SideBox({ changeLoginDivState }) {
                 Submit an Idea
               </Button>
             </SheetTrigger>
+
             <SheetContent className=''>
               <SheetHeader className='p-0 flex justify-center  bg-need-dark-green h-1/5  rounded-tl-3xl'>
                 <SheetTitle className='text-need-light-green pl-10'>
                   Tell us your idea!
                 </SheetTitle>
+                <SheetDescription></SheetDescription>
               </SheetHeader>
               <div className='p-5'>
-                <h1>One sentence that summarises your idea</h1>
-                <Input className='mt-5 border-border-color border-2 ' />
-                <h1 className='mt-5'>
-                  Why your idea is useful, who should benefit and how it should
-                  work?
-                </h1>
-                <textarea
-                  name=''
-                  id=''
-                  className='mt-5 w-full rounded-lg h-[200px] border-2 border-border-color '
-                ></textarea>
-                <h1 className='mt-5'>
-                  Once reviewed it will show up in the Ideas tab. If it's an
-                  idea we're passionate about we might reach out about it.
-                </h1>
-                <Button
-                  type='submit'
-                  className=' mt-5 bg-need-light-green text-need-dark-green'
-                >
-                  Submit idea
-                </Button>
+                <form onSubmit={handleSubmit}>
+                  <h1>One sentence that summarises your idea</h1>
+                  <Input
+                    value={input}
+                    onChange={(e) => {
+                      setInput(e.target.value);
+                    }}
+                    className='mt-5 border-border-color border-2 '
+                  />
+                  <h1 className='mt-5'>
+                    Why your idea is useful, who should benefit and how it
+                    should work?
+                  </h1>
+                  <textarea
+                    name=''
+                    id=''
+                    value={text}
+                    onChange={(e) => {
+                      setText(e.target.value);
+                    }}
+                    className='mt-5 w-full rounded-lg h-[200px] border-2 border-border-color '
+                  ></textarea>
+                  <h1 className='mt-5'>
+                    Once reviewed it will show up in the Ideas tab. If it's an
+                    idea we're passionate about we might reach out about it.
+                  </h1>
+                  <Button
+                    type='submit'
+                    className=' mt-5 bg-need-light-green text-need-dark-green'
+                  >
+                    Submit idea
+                  </Button>
+                  <SheetClose asChild>
+                    <Button className='  bg-need-light-green text-need-dark-green'>
+                      Close
+                    </Button>
+                  </SheetClose>
+                </form>
               </div>
             </SheetContent>
           </Sheet>
