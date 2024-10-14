@@ -118,7 +118,7 @@ function SideBox({ changeLoginDivState, updateData }) {
             onClick={() => {
               changeLoginDivState(true);
             }}
-            className='bg-need-light-green text-need-dark-green mt-5 mb-1 sm:p-6 text-md sm:w-auto sm:h-auto w-18 p-2 hover:brightness-125'
+            className='bg-need-light-green text-need-dark-green mt-5 mb-1 sm:p-6 text-md sm:w-20 sm:h-10 w-18 p-2 hover:brightness-125'
           >
             Log In
           </Button>

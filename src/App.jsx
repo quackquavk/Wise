@@ -183,7 +183,7 @@ function App() {
             );
           })}
         </section>
-        <div className=' md:max-lg:pb-4 bg-need-dark-green w-[400px] px-5 lg:ml-10   py-5 rounded-[45px] lg:h-[26rem]'>
+        <div className=' md:max-lg:pb-4 bg-need-dark-green w-64 sm:max-lg:w-[400px] px-5 lg:ml-10  lg:pb-5  lg:w-[400px]  py-5 rounded-[45px] lg:h-[30rem]'>
           <SideBox
             updateData={updateData}
             changeLoginDivState={changeLoginDivState}
