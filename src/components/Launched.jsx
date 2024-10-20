@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import LaunchedContent from './LaunchedContent';
 
-function Launched({ title, body }) {
+function Launched() {
+  // const { launchdata } = useContext(LaunchedContent);
   const [launchedContent, setLaunchedContent] = useState(true);
   const ToggleLaunchDiv = () => {
     setLaunchedContent(!launchedContent);
   };
+  useEffect(() => {
+    setLaunchedContent(true);
+  }, []);
   return (
     <>
       {!launchedContent && (

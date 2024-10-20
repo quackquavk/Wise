@@ -24,6 +24,7 @@ import {
 import Selectcompo from './components/Selectcompo';
 export const LogContext = createContext(null);
 export const IdeaContext = createContext(null);
+export const LaunchedContext = createContext(null);
 function App() {
   const [data, setdata] = useState([]);
   const [loginDiv, setloginDiv] = useState(false);
@@ -36,6 +37,7 @@ function App() {
   const url = 'https://jsonplaceholder.typicode.com/posts';
   const scrollLogin = useRef(null);
   const popup = useRef(null);
+  const launchdata = useState('');
 
   const fetchdata = async () => {
     const response = await fetch(url);
@@ -131,6 +133,7 @@ function App() {
     changeLoginDivState,
     updateData,
   };
+  const LaunchValue = { launchdata };
   const [activeTab, setActiveTab] = useState('Ideas');
   const tabdata = [
     {
@@ -150,7 +153,11 @@ function App() {
     {
       label: 'Launched',
       value: 'Launched',
-      desc: <Launched />,
+      desc: (
+        <LaunchedContext.Provider value={LaunchValue}>
+          <Launched />
+        </LaunchedContext.Provider>
+      ),
     },
   ];
 
@@ -213,7 +220,7 @@ function App() {
       )}
       <div className=' mt-5 flex lg:flex-row lg:justify-center lg:items-start lg:pl-52 lg:pr-36 px-2 flex-col items-center'>
         <Tabs className='w-full mt-5' value={activeTab}>
-          <div className='w-full flex justify-between'>
+          <div className='w-full flex justify-between lg:flex-row flex-col items-center'>
             <TabsHeader
               className='rounded-none border-b border-blue-gray-50 bg-transparent  p-0 h-16 '
               indicatorProps={{
@@ -226,7 +233,7 @@ function App() {
                   key={value}
                   value={value}
                   onClick={() => setActiveTab(value)}
-                  className={` text-base  px-5 ml-2 ${
+                  className={` text-base hover:cursor-pointer  px-5 ml-2 ${
                     activeTab === value
                       ? 'font-extrabold text-need-dark-green'
                       : ''
