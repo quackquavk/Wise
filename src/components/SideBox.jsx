@@ -23,6 +23,8 @@ function SideBox({ changeLoginDivState, updateData }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     updateData(new Date().getTime().toString(), input, text);
+    setInput('');
+    setText('');
   };
   return (
     <>

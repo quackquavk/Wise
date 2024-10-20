@@ -124,7 +124,9 @@ function Box({ changeLoginDivState, DivpopUp, item, voteup, votedown }) {
         }}
         className='p-5 pb-10 '
       >
-        <h1 className='font-bold text-xs sm:text-base mt-5 '>{title}</h1>
+        <h1 className='font-bold text-xs sm:text-lg mt-5 overflow-hidden '>
+          {title}
+        </h1>
         <p className=' sm:text-base text-xs mt-5'>{body}</p>
       </section>
     </div>

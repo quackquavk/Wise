@@ -6,13 +6,24 @@ import NavBar from './components/NavBar';
 import Hero from './components/Hero';
 import Box from './components/Box';
 import SideBox from './components/SideBox';
-import { Button } from './components/ui/button';
+// import { Button } from './components/ui/button';
 import LogIn from './components/LogIn';
 import Register from './components/Register';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import Option from './components/Option';
+import Launched from './components/Launched';
+import Idea from './components/Idea';
+import {
+  Tabs,
+  TabsHeader,
+  TabsBody,
+  Tab,
+  TabPanel,
+} from '@material-tailwind/react';
+import Selectcompo from './components/Selectcompo';
 export const LogContext = createContext(null);
+export const IdeaContext = createContext(null);
 function App() {
   const [data, setdata] = useState([]);
   const [loginDiv, setloginDiv] = useState(false);
@@ -20,6 +31,8 @@ function App() {
   const [selectedItem, setselectedItem] = useState(null);
   const [scrollPosition, setscrollPosition] = useState(0);
   const [optionStatus, setOptionStatus] = useState(false);
+  const [idea, setIdea] = useState(true);
+  const [launched, setLaunched] = useState(false);
   const url = 'https://jsonplaceholder.typicode.com/posts';
   const scrollLogin = useRef(null);
   const popup = useRef(null);
@@ -110,6 +123,36 @@ function App() {
     changeRegisterDivState,
     changeOptionDivState,
   };
+  const IdeaValue = {
+    data,
+    votedown,
+    voteup,
+    DivpopUp,
+    changeLoginDivState,
+    updateData,
+  };
+  const [activeTab, setActiveTab] = useState('Ideas');
+  const tabdata = [
+    {
+      label: 'InProgress',
+      value: 'Inprogress',
+      desc: <div>This is the inprogess tab</div>,
+    },
+    {
+      label: 'Ideas',
+      value: 'Ideas',
+      desc: (
+        <IdeaContext.Provider value={IdeaValue}>
+          <Idea />
+        </IdeaContext.Provider>
+      ),
+    },
+    {
+      label: 'Launched',
+      value: 'Launched',
+      desc: <Launched />,
+    },
+  ];
 
   return (
     <section className='relative'>
@@ -168,27 +211,41 @@ function App() {
           </section>
         </div>
       )}
-      <div className=' mt-5 flex lg:flex-row lg:justify-center lg:items-start lg:pl-52 lg:pr-36  flex-col items-center'>
-        <section className='w-2/3'>
-          {data.map((item) => {
-            return (
-              <Box
-                key={item.id}
-                item={item}
-                voteup={voteup}
-                votedown={votedown}
-                DivpopUp={DivpopUp}
-                changeLoginDivState={changeLoginDivState}
-              />
-            );
-          })}
-        </section>
-        <div className=' md:max-lg:pb-4 bg-need-dark-green w-64 sm:max-lg:w-[400px] px-5 lg:ml-10  lg:pb-5  lg:w-[400px]  py-5 rounded-[45px] lg:h-[30rem]'>
-          <SideBox
-            updateData={updateData}
-            changeLoginDivState={changeLoginDivState}
-          />
-        </div>
+      <div className=' mt-5 flex lg:flex-row lg:justify-center lg:items-start lg:pl-52 lg:pr-36 px-2 flex-col items-center'>
+        <Tabs className='w-full mt-5' value={activeTab}>
+          <div className='w-full flex justify-between'>
+            <TabsHeader
+              className='rounded-none border-b border-blue-gray-50 bg-transparent  p-0 h-16 '
+              indicatorProps={{
+                className:
+                  'bg-transparent border-b-2 border-black shadow-none rounded-none',
+              }}
+            >
+              {tabdata.map(({ label, value }) => (
+                <Tab
+                  key={value}
+                  value={value}
+                  onClick={() => setActiveTab(value)}
+                  className={` text-base  px-5 ml-2 ${
+                    activeTab === value
+                      ? 'font-extrabold text-need-dark-green'
+                      : ''
+                  }`}
+                >
+                  {label}
+                </Tab>
+              ))}
+            </TabsHeader>
+            <Selectcompo activeTab={activeTab} />
+          </div>
+          <TabsBody className='mt-20 w-full'>
+            {tabdata.map(({ value, desc }) => (
+              <TabPanel key={value} value={value}>
+                {desc}
+              </TabPanel>
+            ))}
+          </TabsBody>
+        </Tabs>
       </div>
     </section>
   );
