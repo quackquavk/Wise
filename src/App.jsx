@@ -234,9 +234,7 @@ function App() {
                   value={value}
                   onClick={() => setActiveTab(value)}
                   className={` text-base hover:cursor-pointer  px-5 ml-2 ${
-                    activeTab === value
-                      ? 'font-extrabold text-need-dark-green'
-                      : ''
+                    activeTab === value ? 'font-bold text-need-dark-green' : ''
                   }`}
                 >
                   {label}
