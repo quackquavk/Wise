@@ -1,19 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import LaunchedContent from './LaunchedContent';
+import React, { useState } from 'react';
 
-function Launched() {
-  // const { launchdata } = useContext(LaunchedContent);
-  const [launchedContent, setLaunchedContent] = useState(true);
+function InProgess() {
+  const [inprogessContent, setinprogessContent] = useState(false);
   const ToggleLaunchDiv = () => {
-    setLaunchedContent(!launchedContent);
+    setinprogessContent(!inprogessContent);
   };
-  useEffect(() => {
-    setLaunchedContent(true);
-  }, []);
   return (
     <>
-      {!launchedContent && (
+      {!inprogessContent && (
         <section
           className='w-full h-32 flex mb-10 hover:cursor-pointer'
           onClick={ToggleLaunchDiv}
@@ -34,10 +28,10 @@ function Launched() {
           </div>
         </section>
       )}
-      {launchedContent && (
+      {inprogessContent && (
         <section
           className={`w-full mb-10 transition-all duration-700 ease-in-out ${
-            launchedContent ? 'h-auto' : 'h-0 overflow-hidden'
+            inprogessContent ? 'h-auto' : 'h-0 overflow-hidden'
           }`}
         >
           <div
@@ -53,21 +47,13 @@ function Launched() {
           </div>
           <div
             className={`rounded-br-3xl transition-all duration-700 ease-in-out rounded-bl-3xl pl-10 py-14 bg-border-color w-full  grid grid-cols-1 gap-y-4 xl:grid-cols-3 lg:gap-y-6 lg:gap-x-2 sm:grid-cols-2${
-              launchedContent ? 'h-auto' : 'h-0 overflow-hidden'
+              inprogessContent ? 'h-auto' : 'h-0 overflow-hidden'
             }`}
-          >
-            <LaunchedContent />
-            <LaunchedContent />
-            <LaunchedContent />
-            <LaunchedContent />
-            <LaunchedContent />
-            <LaunchedContent />
-            <LaunchedContent />
-          </div>
+          ></div>
         </section>
       )}
     </>
   );
 }
 
-export default Launched;
+export default InProgess;

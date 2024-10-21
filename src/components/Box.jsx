@@ -65,7 +65,7 @@ function Box({ changeLoginDivState, DivpopUp, item, voteup, votedown }) {
           setdatastateup('off');
           setLoading(false);
           votedown(id);
-        }, 2000);
+        }, 1500);
         // if (datastatedown == 'on') {
         //   setdatastatedown('off');
         // }
@@ -78,7 +78,7 @@ function Box({ changeLoginDivState, DivpopUp, item, voteup, votedown }) {
           setLoading(false);
 
           voteup(id);
-        }, 2000);
+        }, 1500);
 
         console.log('down');
       }

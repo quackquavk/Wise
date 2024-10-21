@@ -14,6 +14,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import Option from './components/Option';
 import Launched from './components/Launched';
 import Idea from './components/Idea';
+import InProgess from './components/InProgess';
 import {
   Tabs,
   TabsHeader,
@@ -139,7 +140,7 @@ function App() {
     {
       label: 'InProgress',
       value: 'Inprogress',
-      desc: <div>This is the inprogess tab</div>,
+      desc: <InProgess />,
     },
     {
       label: 'Ideas',

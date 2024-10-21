@@ -1,11 +1,14 @@
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 
 function Spinner({ classname }) {
   return (
     <div role='status'>
       <svg
         aria-hidden='true'
-        className={`inline w-6 h-6 text-white animate-spin dark:text-gray-600 fill-need-dark-green ${classname}`}
+        className={twMerge(
+          ` w-6 h-6 text-white animate-spin dark:text-gray-600 fill-need-dark-green ${classname}`
+        )}
         viewBox='0 0 100 101'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'
