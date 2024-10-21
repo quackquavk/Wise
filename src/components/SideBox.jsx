@@ -76,21 +76,20 @@ function SideBox({ changeLoginDivState, updateData }) {
                     onChange={(e) => {
                       setText(e.target.value);
                     }}
-                    className='mt-5 w-full rounded-lg h-[200px] border-2 border-border-color '
+                    style={{ overflow: 'auto', whiteSpace: 'pre-wrap' }}
+                    className='mt-5 w-full rounded-lg h-[200px] border-2 resize-none border-border-color '
                   ></textarea>
                   <h1 className='mt-5'>
                     Once reviewed it will show up in the Ideas tab. If it's an
                     idea we're passionate about we might reach out about it.
                   </h1>
-                  <Button
-                    type='submit'
-                    className=' mt-5 bg-need-light-green text-need-dark-green'
-                  >
-                    Submit idea
-                  </Button>
-                  <SheetClose asChild>
-                    <Button className='  bg-need-light-green text-need-dark-green'>
-                      Close
+
+                  <SheetClose>
+                    <Button
+                      type='submit'
+                      className=' mt-5 bg-need-light-green text-need-dark-green'
+                    >
+                      Submit idea
                     </Button>
                   </SheetClose>
                 </form>

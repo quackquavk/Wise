@@ -19,7 +19,7 @@ function NavBar() {
   const { changeLoginDivState, changeRegisterDivState, changeOptionDivState } =
     useContext(LogContext);
   return (
-    <div className='lg:w-4/5 w-full  p-5 lg:pl-5 pr-0 pl-0 sm:max-lg:left-0 sm:max-lg:pl-10 flex items-center  absolute lg:left-auto top-1 z-15'>
+    <div className='lg:w-4/5  w-full  py-5  lg:pl-5 pr-0 pl-0 sm:max-lg:left-0 sm:max-lg:pl-10 flex items-center sm:absolute  top-20 relative lg:left-auto sm:top-5 z-15 overflow-hidden'>
       <h1 className='mr-10 text-3xl text-need-light-green font-bold italic'>
         Wise
       </h1>
@@ -27,7 +27,7 @@ function NavBar() {
         onClick={() => {
           changeOptionDivState(true);
         }}
-        className=' absolute hover:cursor-pointer sm:max-lg:right-6 right-20 text-need-light-green lg:invisible'
+        className=' absolute hover:cursor-pointer right-10 text-need-light-green lg:invisible overflow-hidden'
         icon={faBars}
       />
       <div className='flex w-full items-center justify-between lg:visible invisible'>

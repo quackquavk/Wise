@@ -38,9 +38,7 @@ function InProgess() {
             className='w-full bg-need-dark-green flex items-center  rounded-tr-3xl rounded-tl-3xl p-10 h-24 hover:cursor-pointer'
             onClick={ToggleLaunchDiv}
           >
-            <h1 className='text-need-light-green text-5xl font-extralight'>
-              -
-            </h1>
+            <h1 className='text-need-light-green text-5xl font-extralight'></h1>
             <h1 className='text-need-light-green text-xl ml-5 font-bold'>
               Wise Account
             </h1>

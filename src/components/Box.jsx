@@ -110,11 +110,11 @@ function Box({ changeLoginDivState, DivpopUp, item, voteup, votedown }) {
   return (
     <div
       key={id}
-      className='flex rounded-3xl bg-need-bg-box hover:bg-need-light-green transition-colors duration-700 ease-in-out hover:cursor-pointer mb-10'
+      className='flex rounded-3xl bg-need-bg-box hover:bg-need-light-green transition-colors duration-700 ease-in-out hover:cursor-pointer mb-10 text-wrap'
     >
       <section className='rounded-tl-3xl rounded-bl-3xl w-36 flex justify-center p-2  bg-need-dark-green '>
         <div
-          className={` ml-2 ${loading ? 'mt-9' : 'mt-10'}`}
+          className={`h-8  ml-2 ${loading ? 'mt-9' : 'mt-10'}`}
           onClick={handleToggleUp}
         >
           {/* <Toggle
@@ -158,7 +158,9 @@ function Box({ changeLoginDivState, DivpopUp, item, voteup, votedown }) {
         <h1 className='font-bold text-xs sm:text-lg mt-5 overflow-hidden '>
           {title}
         </h1>
-        <p className=' sm:text-base text-xs mt-5'>{body}</p>
+        <p className=' sm:text-base text-xs mt-5 overflow-auto text-wrap break-words'>
+          {body}
+        </p>
       </section>
     </div>
   );

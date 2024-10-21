@@ -3,13 +3,13 @@ import NavBar from './NavBar';
 
 function Hero() {
   return (
-    <div className='bg-need-dark-green h-[100vh] w-full flex pl-10 sm:items-center  justify-center sm:max-lg:pl-10 lg:pl-52 lg:pr-36 sm:flex-row flex-col'>
+    <div className='bg-need-dark-green h-[100vh] w-full flex pl-10 sm:items-center  justify-center  sm:max-lg:pl-10 lg:pl-52 lg:pr-36 sm:flex-row flex-col overflow-hidden'>
       <NavBar></NavBar>
-      <div className=' mt-20 '>
+      <div className=' sm:mt-20 mt-24 '>
         <h1 className='text-need-light-green lg:text-8xl text-4xl font-black'>
           Mission <br /> RoadMap
         </h1>
-        <p className='text-white mr-5 mt-10 mb-10'>
+        <p className='text-white lg:mr-5 mt-10 mb-10'>
           Welcome to the Mission Roadmap - a map of how we plan to achieve the
           mission of building money without borders: moving it instantly,
           transparently, conveniently, and - eventually - for free.
@@ -22,7 +22,7 @@ function Hero() {
         </a>
       </div>
       <img
-        className='mt-20 lg:w-[430px] w-60 '
+        className='mt-20 lg:w-[430px]  sm:w-60 w-56 lg:mb-0 mb-16  '
         src='https://wise.com/web-art/assets/illustrations/map-large@1x.webp'
         alt=''
       />
