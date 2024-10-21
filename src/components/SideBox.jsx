@@ -43,7 +43,7 @@ function SideBox({ changeLoginDivState, updateData }) {
           </p>
           <Sheet className=''>
             <SheetTrigger asChild>
-              <Button className='bg-need-dark-green  text-need-light-green border-need-light-green border-2 mt-5 mb-1 p-6 text-md hover:brightness-125'>
+              <Button className='bg-need-dark-green  text-need-light-green border-need-light-green border-2 mt-5 mb-1 p-6 text-xs sm:text-md hover:brightness-125'>
                 Submit an Idea
               </Button>
             </SheetTrigger>
@@ -119,7 +119,7 @@ function SideBox({ changeLoginDivState, updateData }) {
             onClick={() => {
               changeLoginDivState(true);
             }}
-            className='bg-need-light-green text-need-dark-green mt-5 mb-1 sm:p-6 text-md sm:w-20 sm:h-10 w-18 p-2 hover:brightness-125'
+            className='bg-need-light-green text-need-dark-green mt-5 mb-1 sm:p-6 sm:text-md text-sm sm:w-20  sm:h-10 w-18 p-2 hover:brightness-125'
           >
             Log In
           </Button>
