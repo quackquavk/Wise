@@ -52,31 +52,31 @@ function NavBar() {
                   Features
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className>
-                  <NavigationMenuLink className=' '>
-                    <div className='h-[350px]'>
-                      <div className='h-60 mt-4 text-lg font-medium w-72 '>
-                        <a
+                  {/* <NavigationMenuLink className=' '> */}
+                  <div className='h-[350px]'>
+                    <div className='h-60 mt-4 text-lg font-medium w-72 '>
+                      {/* <a
                           className='flex w-full select-none flex-col justify-center rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md'
                           href='/'
-                        >
-                          <h1>Multi currency account</h1>
+                        > */}
+                      <h1>Multi currency account</h1>
 
-                          <p>
-                            Explore the account use by 16 million people to
-                            live,work,travel and transfer money worldWdie
-                          </p>
-                        </a>
-                      </div>
-                      <div className=' flex justify-center flex-col pb-16 pl-5'>
-                        <a href=''>
-                          <h1 className='mb-10'>Money trasfer</h1>
-                        </a>
-                        <a href=''>
-                          <h1>Large amount transfer</h1>
-                        </a>
-                      </div>
+                      <p>
+                        Explore the account use by 16 million people to
+                        live,work,travel and transfer money worldWdie
+                      </p>
+                      {/* </a> */}
                     </div>
-                  </NavigationMenuLink>
+                    <div className=' flex justify-center flex-col pb-16 pl-5'>
+                      <a href=''>
+                        <h1 className='mb-10'>Money trasfer</h1>
+                      </a>
+                      <a href=''>
+                        <h1>Large amount transfer</h1>
+                      </a>
+                    </div>
+                  </div>
+                  {/* </NavigationMenuLink> */}
                 </NavigationMenuContent>
               </NavigationMenuItem>
               <NavigationMenuItem>

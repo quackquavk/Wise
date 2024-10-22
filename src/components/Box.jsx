@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react';
 import Spinner from './Spinner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faAngleDown,
-  faAngleUp,
-  faHeart,
-} from '@fortawesome/free-solid-svg-icons';
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { faHeart as HeartRegular } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as HeartSolid } from '@fortawesome/free-solid-svg-icons';
 import { Toggle } from '@/components/ui/toggle';
@@ -54,7 +58,8 @@ function Box({ changeLoginDivState, DivpopUp, item, voteup, votedown }) {
   //   }
   // }, [datastatedown, userLoggedIn, id]);
 
-  const handleToggleUp = () => {
+  const handleToggleUp = (e) => {
+    e.stopPropagation();
     if (userLoggedIn) {
       // if (localStorage.getItem(`${id}_datastateup`) == null) {
       //   setdatastateup('on');
@@ -108,61 +113,101 @@ function Box({ changeLoginDivState, DivpopUp, item, voteup, votedown }) {
     }
   };
   return (
-    <div
-      key={id}
-      className='flex rounded-3xl bg-need-bg-box hover:bg-need-light-green transition-colors duration-700 ease-in-out hover:cursor-pointer mb-10 text-wrap'
-    >
-      <section className='rounded-tl-3xl rounded-bl-3xl w-36 flex justify-center p-2  bg-need-dark-green '>
+    <Dialog>
+      <DialogTrigger>
         <div
-          className={`h-8  ml-2 ${loading ? 'mt-9' : 'mt-10'}`}
-          onClick={handleToggleUp}
+          key={id}
+          className='flex rounded-3xl bg-need-bg-box hover:bg-need-light-green transition-colors duration-700 ease-in-out hover:cursor-pointer mb-10 text-wrap'
         >
-          {/* <Toggle
+          <section className='rounded-tl-3xl rounded-bl-3xl w-36 flex justify-center p-2  bg-need-dark-green '>
+            <div
+              className={`h-8  ml-2 ${loading ? 'mt-9' : 'mt-10'}`}
+              onClick={handleToggleUp}
+            >
+              {/* <Toggle
             data-state={datastateup}
             className='flex items-center justify-center mt-8 hover:cursor-pointer text-need-light-green text-lg rounded-2xl'
             onPressedChange={handleToggleUp}
           >
             <FontAwesomeIcon className='text-center ' icon={faAngleUp} />
           </Toggle> */}
-          {loading ? (
-            <Spinner classname={'fill-need-light-green text-need-dark-green'} />
-          ) : (
-            <FontAwesomeIcon
-              icon={datastateup == 'on' ? HeartSolid : HeartRegular}
-              className={`text-xl ${
-                datastateup == 'on'
-                  ? 'text-need-light-green'
-                  : 'text-need-light-green'
-              }`}
-            />
-          )}
+              {loading ? (
+                <Spinner
+                  classname={'fill-need-light-green text-need-dark-green'}
+                />
+              ) : (
+                <FontAwesomeIcon
+                  icon={datastateup == 'on' ? HeartSolid : HeartRegular}
+                  className={`text-xl ${
+                    datastateup == 'on'
+                      ? 'text-need-light-green'
+                      : 'text-need-light-green'
+                  }`}
+                />
+              )}
 
-          {/* <Toggle
+              {/* <Toggle
             data-state={datastatedown}
             className='flex items-center justify-center mt-2 hover:cursor-pointer text-need-light-green text-lg rounded-2xl'
             onPressedChange={handleToggledown}
           >
             <FontAwesomeIcon className='text-center ' icon={faAngleDown} />
           </Toggle> */}
+            </div>
+            <h1 className='mt-10 mr-2 ml-4  text-xs sm:text-base text-white font-medium '>
+              {vote}
+            </h1>
+          </section>
+          <section
+            // onClick={() => {
+            //   DivpopUp(id);
+            // }}
+            className='p-5 pb-10 flex flex-col items-start'
+          >
+            <h1 className='font-bold text-xs sm:text-lg mt-5 text-start  overflow-hidden '>
+              {title}
+            </h1>
+            <p className=' sm:text-base text-xs mt-5 overflow-auto text-wrap text-start break-words'>
+              {body}
+            </p>
+          </section>
         </div>
-        <h1 className='mt-10 mr-2 ml-4  text-xs sm:text-base text-white font-medium '>
-          {vote}
-        </h1>
-      </section>
-      <section
-        onClick={() => {
-          DivpopUp(id);
-        }}
-        className='p-5 pb-10 '
-      >
-        <h1 className='font-bold text-xs sm:text-lg mt-5 overflow-hidden '>
-          {title}
-        </h1>
-        <p className=' sm:text-base text-xs mt-5 overflow-auto text-wrap break-words'>
-          {body}
-        </p>
-      </section>
-    </div>
+      </DialogTrigger>
+      <DialogContent>
+        <div className='bg-need-dark-green h-60 flex justify-around items-center text-need-light-green rounded-tr-3xl rounded-tl-3xl p-2 px-10'>
+          <h1 className='mb-5 font-bold text-xl '>{title}</h1>
+          <section className='flex mt-28'>
+            <div
+              className={`h-8  mr-2 hover:cursor-pointer`}
+              onClick={handleToggleUp}
+            >
+              {loading ? (
+                <Spinner
+                  classname={'fill-need-light-green text-need-dark-green'}
+                />
+              ) : (
+                <FontAwesomeIcon
+                  icon={datastateup == 'on' ? HeartSolid : HeartRegular}
+                  className={`text-xl ${
+                    datastateup == 'on'
+                      ? 'text-need-light-green'
+                      : 'text-need-light-green'
+                  }`}
+                />
+              )}
+            </div>
+            <h1 className='font-bold flex '> {vote}</h1>
+          </section>
+        </div>
+        <div className=' rounded-br-3xl rounded-bl-3xl bg-white'>
+          <section className='p-5 pl-10'>
+            <h1>About</h1>
+          </section>
+          <div className='p-10'>{body}</div>
+        </div>
+        <div />
+      </DialogContent>
+    </Dialog>
   );
 }
 

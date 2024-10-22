@@ -155,9 +155,9 @@ function App() {
       label: 'Launched',
       value: 'Launched',
       desc: (
-        <LaunchedContext.Provider value={LaunchValue}>
+        <IdeaContext.Provider value={IdeaValue}>
           <Launched />
-        </LaunchedContext.Provider>
+        </IdeaContext.Provider>
       ),
     },
   ];

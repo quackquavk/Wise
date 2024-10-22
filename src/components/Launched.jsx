@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import LaunchedContent from './LaunchedContent';
+import { IdeaContext } from '@/App';
 
 function Launched() {
   // const { launchdata } = useContext(LaunchedContent);
@@ -8,9 +9,7 @@ function Launched() {
   const ToggleLaunchDiv = () => {
     setLaunchedContent(!launchedContent);
   };
-  useEffect(() => {
-    setLaunchedContent(true);
-  }, []);
+  const { data, voteup, votedown } = useContext(IdeaContext);
   return (
     <>
       {!launchedContent && (
@@ -36,9 +35,8 @@ function Launched() {
       )}
       {launchedContent && (
         <section
-          className={`w-full mb-10 transition-all duration-700 ease-in-out ${
-            launchedContent ? 'h-auto' : 'h-0 overflow-hidden'
-          }`}
+          className={`w-full mb-10 transition-all duration-700 ease-in-out '
+`}
         >
           <div
             className='w-full bg-need-dark-green flex items-center  rounded-tr-3xl rounded-tl-3xl p-10 h-24 hover:cursor-pointer'
@@ -53,16 +51,17 @@ function Launched() {
           </div>
           <div
             className={`rounded-br-3xl transition-all duration-700 ease-in-out rounded-bl-3xl pl-10 py-14 bg-border-color w-full  grid grid-cols-1 gap-y-4 xl:grid-cols-3 lg:gap-y-6 lg:gap-x-2 sm:grid-cols-2${
-              launchedContent ? 'h-auto' : 'h-0 overflow-hidden'
+              launchedContent ? 'h-auto' : 'h-0'
             }`}
           >
-            <LaunchedContent />
-            <LaunchedContent />
-            <LaunchedContent />
-            <LaunchedContent />
-            <LaunchedContent />
-            <LaunchedContent />
-            <LaunchedContent />
+            {data.map((item) => (
+              <LaunchedContent
+                key={item.id}
+                item={item}
+                voteup={voteup}
+                votedown={votedown}
+              />
+            ))}
           </div>
         </section>
       )}

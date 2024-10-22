@@ -10,8 +10,8 @@ import {
 } from '@/components/ui/select';
 function Selectcompo({ activeTab }) {
   return (
-    <Select>
-      <SelectTrigger className='w-96 px-3 mt-5 lg:mt-0 py-6 font-bold'>
+    <Select className=''>
+      <SelectTrigger className='w-96 px-3 ml-14 mt-5 lg:mt-0 py-6 font-bold'>
         <SelectValue
           placeholder={`${
             activeTab == 'Ideas' ? 'Most popular first' : 'All regions'
