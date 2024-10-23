@@ -44,8 +44,15 @@ function App() {
   const [selectedIdea, setSelectedIdea] = useState('Most popular first');
   const [selectedLaunched, setSelectedLaunched] = useState('All region');
   const [activeTab, setActiveTab] = useState('Ideas');
+  const [seemoreforIdeas, setSeeMoreForIdeas] = useState(5);
   const handleIdeasSelect = (value) => {
     setSelectedIdea(value);
+  };
+  const increaseMore = () => {
+    setSeeMoreForIdeas(seemoreforIdeas + 5);
+  };
+  const decreaseMore = () => {
+    setSeeMoreForIdeas(5);
   };
   const handleInProgressSelect = (value) => {
     setSelectedInProgess(value);
@@ -57,7 +64,7 @@ function App() {
   const fetchdata = async () => {
     const response = await fetch(url);
     const result = await response.json();
-    return result.slice(0, 6).map((item) => {
+    return result.slice(0, seemoreforIdeas).map((item) => {
       const itemvoteid = localStorage.getItem(`${item.id}_vote`);
       if (!itemvoteid) {
         item.vote = Math.floor(Math.random() * (100 - 10 + 1)) + 10;
@@ -77,7 +84,7 @@ function App() {
     fetchdata().then((elements) => {
       setdata(elements);
     });
-  }, []);
+  }, [seemoreforIdeas]);
   useEffect(() => {
     if (loginDiv) {
       scrollLogin.current?.scrollIntoView({ behavior: 'smooth' });
@@ -143,6 +150,9 @@ function App() {
     DivpopUp,
     changeLoginDivState,
     updateData,
+    increaseMore,
+    decreaseMore,
+    seemoreforIdeas,
   };
   const SelectValue = {
     activeTab,
