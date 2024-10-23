@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import LaunchedContent from './LaunchedContent';
 
 function InProgess() {
   const [inprogessContent, setinprogessContent] = useState(false);
@@ -46,10 +47,23 @@ function InProgess() {
             </h1>
           </div>
           <div
-            className={`rounded-br-3xl transition-all duration-700 ease-in-out rounded-bl-3xl pl-10 py-14 bg-border-color w-full  grid grid-cols-1 gap-y-4 xl:grid-cols-3 lg:gap-y-6 lg:gap-x-2 sm:grid-cols-2${
+            className={`rounded-br-3xl transition-all duration-700 ease-in-out rounded-bl-3xl pl-10 py-14 bg-border-color w-full  grid grid-cols-1 gap-y-4 xl:grid-cols-4 lg:gap-y-6 lg:gap-x-2 sm:grid-cols-2${
               inprogessContent ? 'h-auto' : 'h-0 overflow-hidden'
             }`}
-          ></div>
+          >
+            <div className='w-full col-span-2  '>
+              <h1 className='font-medium text-xl'>Now</h1>
+              <div className='grid grid-cols-2'></div>
+            </div>
+            <div className='w-full  border-l border-black px-5'>
+              <h1 className='font-medium text-xl'>Next</h1>
+            </div>
+            <div className='w-full'>
+              <h1 className='font-medium text-xl border-l border-black px-5'>
+                Next
+              </h1>
+            </div>
+          </div>
         </section>
       )}
     </>
