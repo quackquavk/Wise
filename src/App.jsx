@@ -43,7 +43,7 @@ function App() {
   const fetchdata = async () => {
     const response = await fetch(url);
     const result = await response.json();
-    return result.slice(0, 4).map((item) => {
+    return result.slice(0, 6).map((item) => {
       const itemvoteid = localStorage.getItem(`${item.id}_vote`);
       if (!itemvoteid) {
         item.vote = Math.floor(Math.random() * (100 - 10 + 1)) + 10;

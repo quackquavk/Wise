@@ -77,7 +77,7 @@ function SideBox({ changeLoginDivState, updateData }) {
                       setText(e.target.value);
                     }}
                     style={{ overflow: 'auto', whiteSpace: 'pre-wrap' }}
-                    className='mt-5 w-full rounded-lg h-[200px] border-2 resize-none border-border-color '
+                    className='mt-5 w-full rounded-lg sm:h-[200px] h-32 border-2 resize-none border-border-color '
                   ></textarea>
                   <h1 className='mt-5'>
                     Once reviewed it will show up in the Ideas tab. If it's an
