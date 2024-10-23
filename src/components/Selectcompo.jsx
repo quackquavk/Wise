@@ -23,7 +23,7 @@ function Selectcompo() {
     <>
       {activeTab === 'Ideas' && (
         <Select value={selectedIdea} onValueChange={handleIdeasSelect}>
-          <SelectTrigger className='sm:w-96 w-64 px-3 ml-14 mt-5 lg:mt-0 py-6 font-bold'>
+          <SelectTrigger className='lg:w-96 w-72 px-3 lg:ml-14 mt-5 lg:mt-0 py-6 font-bold'>
             <SelectValue placeholder='Most popular first' />
           </SelectTrigger>
           <SelectContent>
@@ -44,7 +44,7 @@ function Selectcompo() {
           onValueChange={handleInProgressSelect}
           className=''
         >
-          <SelectTrigger className='w-96 px-3 ml-14 mt-5 lg:mt-0 py-6 font-bold'>
+          <SelectTrigger className='lg:w-96 px-3 lg:ml-14 mt-5 w-72 lg:mt-0 py-6 font-bold'>
             <SelectValue placeholder='All region' />
           </SelectTrigger>
           <SelectContent>
@@ -62,7 +62,7 @@ function Selectcompo() {
           onValueChange={handleLaunchedSelect}
           className=''
         >
-          <SelectTrigger className='w-96 px-3 ml-14 mt-5 lg:mt-0 py-6 font-bold'>
+          <SelectTrigger className='lg:w-96 w-72 px-3 lg:ml-14 mt-5 lg:mt-0 py-6 font-bold'>
             <SelectValue placeholder='All region' />
           </SelectTrigger>
           <SelectContent>
