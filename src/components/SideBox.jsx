@@ -33,17 +33,17 @@ function SideBox({ changeLoginDivState, updateData }) {
           <img
             src='https://wise.com/web-art/assets/illustrations/light-bulb-medium@1x.webp'
             alt=''
-            className='w-24 mb-5'
+            className='sm:w-24 w-20 mb-5'
           />
           <h1 className='text-need-light-green font-bold sm:text-2xl text-lg '>
             Share your ideas!
           </h1>
-          <p className='text-white mt-5'>
+          <p className='text-white mt-5 sm:text-base text-sm'>
             Have an idea to improve our product? Share it with our product team
           </p>
           <Sheet className=''>
             <SheetTrigger asChild>
-              <Button className='bg-need-dark-green  text-need-light-green border-need-light-green border-2 mt-5 mb-1 p-6 text-xs sm:text-md hover:brightness-125'>
+              <Button className='bg-need-dark-green  text-need-light-green border-need-light-green border-2 mt-5 mb-1 sm:p-5 p-3 text-xs sm:text-sm hover:brightness-125'>
                 Submit an Idea
               </Button>
             </SheetTrigger>
@@ -119,7 +119,7 @@ function SideBox({ changeLoginDivState, updateData }) {
             onClick={() => {
               changeLoginDivState(true);
             }}
-            className='bg-need-light-green text-need-dark-green mt-5 mb-1 sm:p-6 sm:text-md text-sm sm:w-20  sm:h-10 w-18 p-2 hover:brightness-125'
+            className='bg-need-light-green text-need-dark-green mt-5 mb-1 sm:p-5  sm:text-sm text-xs sm:w-20  sm:h-10 w-18 p-3 hover:brightness-125'
           >
             Log In
           </Button>

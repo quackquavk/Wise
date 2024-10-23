@@ -3,11 +3,14 @@ import { Button } from './ui/button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { LogContext } from '@/App';
+import { doSignOut } from './auth';
+import { useAuth } from './authContext';
 
 function Option() {
   const [featuresStatus, setfeaturesStatus] = useState(false);
   const { changeLoginDivState, changeRegisterDivState, changeOptionDivState } =
     useContext(LogContext);
+  const { currentUser, userLoggedIn } = useAuth();
   return (
     <div className='absolute px-10 flex flex-col  h-[100vh] items-start w-full bg-white z-20'>
       <div className='flex'>
@@ -59,25 +62,46 @@ function Option() {
           Help
         </Button>
       </article>
-      <Button
-        onClick={() => {
-          changeOptionDivState(false);
-          changeLoginDivState(true);
-        }}
-        className=' mb-5 w-full bg-white shadow-none text-need-dark-green border-2 border-need-dark-green p-3 h-12'
-      >
-        Log In
-      </Button>
+      {!userLoggedIn && (
+        <>
+          <Button
+            onClick={() => {
+              changeOptionDivState(false);
+              changeLoginDivState(true);
+            }}
+            className=' mb-5 w-full bg-white shadow-none text-need-dark-green border-2 border-need-dark-green p-3 h-12'
+          >
+            Log In
+          </Button>
 
-      <Button
-        onClick={() => {
-          changeOptionDivState(false);
-          changeRegisterDivState(true);
-        }}
-        className='w-full bg-need-light-green shadow-none text-need-dark-green  p-3 h-12'
-      >
-        Register
-      </Button>
+          <Button
+            onClick={() => {
+              changeOptionDivState(false);
+              changeRegisterDivState(true);
+            }}
+            className='w-full bg-need-light-green shadow-none text-need-dark-green  p-3 h-12'
+          >
+            Register
+          </Button>
+        </>
+      )}
+      {userLoggedIn && (
+        <div className='w-full '>
+          <h1 className='text-center font-semibold mb-5 text-need-dark-green'>
+            User: &nbsp;
+            {currentUser.displayName.toUpperCase()}
+          </h1>
+          <Button
+            className='w-full p-3 h-12 bg-need-light-green text-need-dark-green font-medium'
+            onClick={() => {
+              doSignOut();
+              changeOptionDivState(false);
+            }}
+          >
+            Sign Out
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
