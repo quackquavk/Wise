@@ -34,7 +34,7 @@ function Idea() {
               />
             ))}
           <Button
-            className='bg-white text-need-dark-green border-2 p-2 sm:p-5 text-xs sm:text-base border-need-dark-green shadow-none'
+            className=' hover:bg-need-light-green hover:border-none bg-white text-need-dark-green border p-2 sm:h-12 sm:w-40 sm:p-4 rounded-[2rem] text-xs sm:text-base border-need-dark-green shadow-none'
             onClick={increaseMore}
           >
             See more ideas
@@ -43,7 +43,7 @@ function Idea() {
             <>
               <Button
                 onClick={decreaseMore}
-                className=' sm:ml-5 bg-white text-need-dark-green border-2 ml-2 sm:p-5 sm:text-base text-xs p-3 border-need-dark-green shadow-none'
+                className='sm:ml-5 ml-2 hover:bg-need-light-green hover:border-none bg-white text-need-dark-green border p-2 sm:h-12 sm:w-40 sm:p-4 rounded-[2rem] text-xs sm:text-base border-need-dark-green shadow-none'
               >
                 See less
               </Button>
