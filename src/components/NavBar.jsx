@@ -48,24 +48,24 @@ function NavBar() {
           <NavigationMenu className=' flex '>
             <NavigationMenuList>
               <NavigationMenuItem className=' bg-need-dark-green text-need-light-green hover:bg-need-dark-green '>
-                <NavigationMenuTrigger className='bg-need-dark-green hover:bg-need-dark-green '>
+                {/* <NavigationMenuTrigger className='bg-need-dark-green hover:bg-need-dark-green '>
                   Features
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className>
-                  {/* <NavigationMenuLink className=' '> */}
-                  <div className='h-[350px]'>
+                <NavigationMenuContent className> */}
+                {/* <NavigationMenuLink className=' '> */}
+                {/* <div className='h-[350px]'>
                     <div className='h-60 mt-4 text-lg font-medium w-72 '>
-                      {/* <a
-                          className='flex w-full select-none flex-col justify-center rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md'
-                          href='/'
-                        > */}
-                      <h1>Multi currency account</h1>
+                      <a
+                        className='flex w-full select-none flex-col justify-center rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md'
+                        href='/'
+                      >
+                        <h1>Multi currency account</h1>
 
-                      <p>
-                        Explore the account use by 16 million people to
-                        live,work,travel and transfer money worldWdie
-                      </p>
-                      {/* </a> */}
+                        <p>
+                          Explore the account use by 16 million people to
+                          live,work,travel and transfer money worldWdie
+                        </p>
+                      </a>
                     </div>
                     <div className=' flex justify-center flex-col pb-16 pl-5'>
                       <a href=''>
@@ -75,9 +75,9 @@ function NavBar() {
                         <h1>Large amount transfer</h1>
                       </a>
                     </div>
-                  </div>
-                  {/* </NavigationMenuLink> */}
-                </NavigationMenuContent>
+                  </div> */}
+                {/* </NavigationMenuLink> */}
+                {/* </NavigationMenuContent> */}
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <Button className=' bg-need-dark-green text-need-light-green shadow-none hover:brightness-125'>

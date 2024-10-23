@@ -26,6 +26,7 @@ import Selectcompo from './components/Selectcompo';
 export const LogContext = createContext(null);
 export const IdeaContext = createContext(null);
 export const LaunchedContext = createContext(null);
+export const SelectContext = createContext(null);
 function App() {
   const [data, setdata] = useState([]);
   const [loginDiv, setloginDiv] = useState(false);
@@ -39,6 +40,19 @@ function App() {
   const scrollLogin = useRef(null);
   const popup = useRef(null);
   const launchdata = useState('');
+  const [selectedInProgress, setSelectedInProgess] = useState('All region');
+  const [selectedIdea, setSelectedIdea] = useState('Most popular first');
+  const [selectedLaunched, setSelectedLaunched] = useState('All region');
+  const [activeTab, setActiveTab] = useState('Ideas');
+  const handleIdeasSelect = (value) => {
+    setSelectedIdea(value);
+  };
+  const handleInProgressSelect = (value) => {
+    setSelectedInProgess(value);
+  };
+  const handleLaunchedSelect = (value) => {
+    setSelectedLaunched(value);
+  };
 
   const fetchdata = async () => {
     const response = await fetch(url);
@@ -69,11 +83,7 @@ function App() {
       scrollLogin.current?.scrollIntoView({ behavior: 'smooth' });
     }
   }, [loginDiv]);
-  useEffect(() => {
-    if (selectedItem) {
-      popup.current?.scrollIntoView({ behavior: 'auto' });
-    }
-  }, [selectedItem]);
+
   const voteup = (id) => {
     const newArray = data.map((item) => {
       console.log(item);
@@ -134,12 +144,21 @@ function App() {
     changeLoginDivState,
     updateData,
   };
+  const SelectValue = {
+    activeTab,
+    selectedInProgress,
+    selectedIdea,
+    selectedLaunched,
+    handleIdeasSelect,
+    handleInProgressSelect,
+    handleLaunchedSelect,
+  };
   const LaunchValue = { launchdata };
-  const [activeTab, setActiveTab] = useState('Ideas');
+
   const tabdata = [
     {
       label: 'InProgress',
-      value: 'Inprogress',
+      value: 'InProgress',
       desc: <InProgess />,
     },
     {
@@ -147,7 +166,9 @@ function App() {
       value: 'Ideas',
       desc: (
         <IdeaContext.Provider value={IdeaValue}>
-          <Idea />
+          <SelectContext.Provider value={SelectValue}>
+            <Idea />
+          </SelectContext.Provider>
         </IdeaContext.Provider>
       ),
     },
@@ -186,39 +207,7 @@ function App() {
         {!(loginDiv || registerDiv) && <Hero></Hero>}
       </LogContext.Provider>
       <div className='mt-20'></div>
-      {selectedItem && (
-        <div
-          ref={popup}
-          className='absolute flex justify-center items-center  w-full h-[100vh] backdrop-blur-lg bg-black bg-opacity-50 z-30'
-        >
-          <section className='lg:w-1/3 relative  '>
-            <FontAwesomeIcon
-              onClick={() => {
-                window.scrollTo(0, scrollPosition);
-                setselectedItem(null);
-              }}
-              className='absolute top-10 right-5 text-2xl hover:cursor-pointer bg-need-background-green px-5 py-4 rounded-full text-need-light-green'
-              icon={faXmark}
-            />
-            <div className='bg-need-dark-green h-60 flex justify-around items-center text-need-light-green rounded-tr-3xl rounded-tl-3xl p-2 px-10'>
-              <h1 className='mb-5 font-bold text-xl '>{selectedItem.title}</h1>
-              <section className='flex mt-28'>
-                <h1 className='font-bold flex '>
-                  {' '}
-                  <span className='mr-3 font-medium'> Votes: </span>{' '}
-                  {selectedItem.vote}
-                </h1>
-              </section>
-            </div>
-            <div className=' rounded-br-3xl rounded-bl-3xl bg-white'>
-              <section className='p-5 pl-10'>
-                <h1>About</h1>
-              </section>
-              <div className='p-10'>{selectedItem.body}</div>
-            </div>
-          </section>
-        </div>
-      )}
+
       <div className=' mt-5 flex lg:flex-row lg:justify-center lg:items-start lg:pl-52 lg:pr-36 px-2 flex-col items-center'>
         <Tabs className='w-full mt-5' value={activeTab}>
           <div className='w-full flex justify-between lg:flex-row flex-col items-center'>
@@ -242,7 +231,9 @@ function App() {
                 </Tab>
               ))}
             </TabsHeader>
-            <Selectcompo activeTab={activeTab} />
+            <SelectContext.Provider value={SelectValue}>
+              <Selectcompo />
+            </SelectContext.Provider>
           </div>
           <TabsBody className='mt-20 w-full'>
             {tabdata.map(({ value, desc }) => (

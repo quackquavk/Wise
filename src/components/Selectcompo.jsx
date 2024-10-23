@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Select,
   SelectContent,
@@ -8,36 +8,73 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-function Selectcompo({ activeTab }) {
+import { SelectContext } from '@/App';
+function Selectcompo() {
+  const {
+    activeTab,
+    selectedInProgress,
+    selectedIdea,
+    selectedLaunched,
+    handleIdeasSelect,
+    handleInProgressSelect,
+    handleLaunchedSelect,
+  } = useContext(SelectContext);
   return (
-    <Select className=''>
-      <SelectTrigger className='w-96 px-3 ml-14 mt-5 lg:mt-0 py-6 font-bold'>
-        <SelectValue
-          placeholder={`${
-            activeTab == 'Ideas' ? 'Most popular first' : 'All regions'
-          }`}
-        />
-      </SelectTrigger>
-      <SelectContent>
-        {!(activeTab == 'Ideas') && (
-          <SelectGroup>
-            {/* <SelectLabel>Fruits</SelectLabel> */}
-            <SelectItem value='All region'>All region</SelectItem>
-            <SelectItem value='Europe'>Europe</SelectItem>
-            <SelectItem value='Asia'>Asia</SelectItem>
-          </SelectGroup>
-        )}
-        {activeTab == 'Ideas' && (
-          <SelectGroup>
-            {/* <SelectLabel>Fruits</SelectLabel> */}
-            <SelectItem value='Most popular First'>
-              Most popular First
-            </SelectItem>
-            <SelectItem value='Most recent First'>Most recent First</SelectItem>
-          </SelectGroup>
-        )}
-      </SelectContent>
-    </Select>
+    <>
+      {activeTab === 'Ideas' && (
+        <Select value={selectedIdea} onValueChange={handleIdeasSelect}>
+          <SelectTrigger className='sm:w-96 w-64 px-3 ml-14 mt-5 lg:mt-0 py-6 font-bold'>
+            <SelectValue placeholder='Most popular first' />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem value='Most popular first'>
+                Most popular first
+              </SelectItem>
+              <SelectItem value='Most recent first'>
+                Most recent first
+              </SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      )}
+      {activeTab === 'InProgress' && (
+        <Select
+          value={selectedInProgress}
+          onValueChange={handleInProgressSelect}
+          className=''
+        >
+          <SelectTrigger className='w-96 px-3 ml-14 mt-5 lg:mt-0 py-6 font-bold'>
+            <SelectValue placeholder='All region' />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem value='All region'>All region</SelectItem>
+              <SelectItem value='Europe'>Europe</SelectItem>
+              <SelectItem value='Asia'>Asia</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      )}
+      {activeTab === 'Launched' && (
+        <Select
+          value={selectedLaunched}
+          onValueChange={handleLaunchedSelect}
+          className=''
+        >
+          <SelectTrigger className='w-96 px-3 ml-14 mt-5 lg:mt-0 py-6 font-bold'>
+            <SelectValue placeholder='All region' />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem value='All region'>All region</SelectItem>
+              <SelectItem value='Europe'>Europe</SelectItem>
+              <SelectItem value='Asia'>Asia</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      )}
+    </>
   );
 }
 

@@ -53,11 +53,11 @@ function LaunchedContent({ item, voteup, votedown }) {
   };
   return (
     <Dialog className=''>
-      <div
-        key={id}
-        className=' relative py-5 mr-10 px-5 group hover:bg-need-light-green transition-colors duration-700 ease-in-out hover:cursor-pointer w-[22 rem] min-h-80  rounded-[2.3rem] bg-white flex flex-col justify-between'
-      >
-        <DialogTrigger>
+      <DialogTrigger>
+        <div
+          key={id}
+          className=' relative py-5 mr-10 px-5 group hover:bg-need-light-green transition-colors duration-700 ease-in-out hover:cursor-pointer w-[22 rem] min-h-80  rounded-[2.3rem] bg-white flex flex-col justify-between'
+        >
           <section className='flex flex-col items-start'>
             <Button className='relative  w-20 h-8 px-1 py-1 text-xs bg-border-color text-black shadow-none border font-medium border-black transition-colors duration-700 ease-in-out group-hover:bg-need-light-green'>
               Region
@@ -85,8 +85,8 @@ function LaunchedContent({ item, voteup, votedown }) {
               <h1 className='ml-2'>{vote}</h1>
             </div>
           </section>
-        </DialogTrigger>
-      </div>
+        </div>
+      </DialogTrigger>
 
       <DialogContent className=' p-0 m-0'>
         <div className='bg-need-dark-green mb-0 pt-28 rounded-tr-[2.5rem] rounded-tl-[2.5rem] pb-10 px-5'>
