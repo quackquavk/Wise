@@ -58,11 +58,13 @@ function LaunchedContent({ item, voteup, votedown }) {
           key={id}
           className=' relative py-5 mr-10 px-5 group hover:bg-need-light-green transition-colors duration-700 ease-in-out hover:cursor-pointer w-[22 rem] min-h-80  rounded-[2.3rem] bg-white flex flex-col justify-between'
         >
-          <section className='flex flex-col items-start'>
+          <section className='flex flex-col items-start overflow-y-auto max-h-56'>
             <Button className='relative  w-20 h-8 px-1 py-1 text-xs bg-border-color text-black shadow-none border font-medium border-black transition-colors duration-700 ease-in-out group-hover:bg-need-light-green'>
               Region
             </Button>
-            <p className='mt-4 w-full text-left font-normal'>{body}</p>
+            <p className='mt-4 w-full text-left font-normal sm:text-wrap  '>
+              {body}
+            </p>
           </section>
 
           <section className='absolute w-10/12 bottom-5 flex mt-10 justify-between items-center'>

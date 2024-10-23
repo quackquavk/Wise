@@ -9,7 +9,7 @@ function InProgess() {
     <>
       {!inprogessContent && (
         <section
-          className='w-full h-32 flex mb-10 hover:cursor-pointer'
+          className='w-full sm:h-32 h-24 flex mb-10 hover:cursor-pointer'
           onClick={ToggleLaunchDiv}
         >
           <div className='w-20 flex justify-center items-center bg-need-dark-green rounded-tl-3xl rounded-bl-3xl'>
@@ -17,7 +17,7 @@ function InProgess() {
           className='text-need-light-green text-3xl font-extrathin'
           icon={faPlus}
         /> */}
-            <h1 className='text-need-light-green font-extralight text-5xl'>
+            <h1 className='text-need-light-green font-extralight text-4xl sm:text-5xl'>
               +
             </h1>
           </div>

@@ -64,7 +64,7 @@ function Idea() {
           ))}
         </section>
       )}
-      <div className='bg-need-dark-green w-80  px-5 md:ml-10 lg:pb-5 py-5 rounded-[45px] lg:h-[30rem] md:max-lg:pb-4 mt-0'>
+      <div className='bg-need-dark-green w-80  px-5 md:ml-10 lg:pb-5 py-5 rounded-[45px] lg:h-[25rem] md:max-lg:pb-4 mt-0'>
         <SideBox
           updateData={updateData}
           changeLoginDivState={changeLoginDivState}
