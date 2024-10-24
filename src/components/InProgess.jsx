@@ -24,7 +24,7 @@ function InProgess() {
               +
             </h1>
           </div>
-          <div className='bg-border-color w-full flex justify-start p-5 items-center rounded-tr-3xl rounded-br-3xl hover:bg-need-light-green transition-colors duration-700 ease-in-out'>
+          <div className='bg-need-dark-green/10 w-full flex justify-start p-5 items-center rounded-tr-3xl rounded-br-3xl hover:bg-need-light-green transition-colors duration-700 ease-in-out'>
             <h1 className='text-xl font-bold text-need-dark-green'>
               Wise Account
             </h1>

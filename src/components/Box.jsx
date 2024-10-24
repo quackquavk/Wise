@@ -117,7 +117,7 @@ function Box({ changeLoginDivState, DivpopUp, item, voteup, votedown }) {
       <DialogTrigger>
         <div
           key={id}
-          className='flex rounded-3xl bg-need-bg-box hover:bg-need-light-green transition-colors duration-700 ease-in-out hover:cursor-pointer mb-10 text-wrap'
+          className='flex rounded-3xl bg-need-dark-green/10 hover:bg-need-light-green transition-colors duration-700 ease-in-out hover:cursor-pointer mb-10 text-wrap'
         >
           <section className='rounded-tl-3xl rounded-bl-3xl w-36 flex justify-center p-2  bg-need-dark-green '>
             <div
