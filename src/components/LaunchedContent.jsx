@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button } from './ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as HeartRegular } from '@fortawesome/free-regular-svg-icons';
-import { faHeart as HeartSolid } from '@fortawesome/free-solid-svg-icons';
-
+import {
+  faHeart as HeartSolid,
+  faCircleExclamation,
+} from '@fortawesome/free-solid-svg-icons';
+import { useAuth } from './authContext';
+import { IdeaContext } from '@/App';
 import Spinner from './Spinner';
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -18,8 +23,9 @@ import {
 } from '@/components/ui/dialog';
 
 function LaunchedContent({ item, voteup, votedown }) {
+  const { changeLoginDivState } = useContext(IdeaContext);
   const { id, title, body, vote } = item;
-
+  const { userLoggedIn } = useAuth();
   const [loading, setLoading] = useState(false);
   const [datastateup, setdatastateup] = useState();
 
@@ -125,11 +131,37 @@ function LaunchedContent({ item, voteup, votedown }) {
                 Comments
               </TabsTrigger>
             </TabsList>
-            <TabsContent value='About'>
-              Make changes to your account here.
-            </TabsContent>
+            <TabsContent value='About'>{body}.</TabsContent>
             <TabsContent value='Comments'>
-              Change your password here.
+              {!userLoggedIn ? (
+                <div className='flex bg-need-dark-green/10 rounded-2xl p-5'>
+                  <FontAwesomeIcon
+                    className='text-5xl'
+                    icon={faCircleExclamation}
+                  />
+                  <div className='flex ml-5 flex-col items-start'>
+                    <h1 className='font-normal'>
+                      You need to log in to leave a comment{' '}
+                    </h1>
+                    <DialogClose>
+                      <Button
+                        onClick={() => {
+                          setTimeout(() => {
+                            changeLoginDivState(true);
+                          }, 500);
+                        }}
+                        className='w-16 px-0 border-b border-b-black rounded-none pb-0 bg-inherit shadow-none text-need-dark-green hover:bg-inherit'
+                      >
+                        Log in
+                      </Button>
+                    </DialogClose>
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <h1>You can comment </h1>
+                </div>
+              )}
             </TabsContent>
           </Tabs>
         </div>

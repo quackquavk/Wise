@@ -58,7 +58,7 @@ const LogIn = React.forwardRef(({ changeLoginDivState }, ref) => {
           }}
         />
         <Button
-          className='mt-10 p-6 bg-need-dark-green text-need-light-green'
+          className='mt-10 p-6 bg-need-dark-green text-white'
           type='submit'
         >
           Log In

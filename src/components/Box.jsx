@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -12,8 +13,12 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { faHeart as HeartRegular } from '@fortawesome/free-regular-svg-icons';
-import { faHeart as HeartSolid } from '@fortawesome/free-solid-svg-icons';
+import {
+  faHeart as HeartSolid,
+  faCircleExclamation,
+} from '@fortawesome/free-solid-svg-icons';
 import { Toggle } from '@/components/ui/toggle';
+import { Button } from './ui/button';
 import { useAuth } from './authContext';
 function Box({ changeLoginDivState, DivpopUp, item, voteup, votedown }) {
   const { userLoggedIn } = useAuth();
@@ -215,7 +220,35 @@ function Box({ changeLoginDivState, DivpopUp, item, voteup, votedown }) {
                 <div className=''>{body}</div>
               </TabsContent>
               <TabsContent value='Comments'>
-                Change your password here.
+                {!userLoggedIn ? (
+                  <div className='flex bg-need-dark-green/10 rounded-2xl p-5'>
+                    <FontAwesomeIcon
+                      className='text-5xl'
+                      icon={faCircleExclamation}
+                    />
+                    <div className='flex ml-5 flex-col items-start'>
+                      <h1 className='font-normal'>
+                        You need to log in to leave a comment{' '}
+                      </h1>
+                      <DialogClose>
+                        <Button
+                          onClick={() => {
+                            setTimeout(() => {
+                              changeLoginDivState(true);
+                            }, 500);
+                          }}
+                          className='w-16 px-0 border-b border-b-black rounded-none pb-0 bg-inherit shadow-none text-need-dark-green hover:bg-inherit'
+                        >
+                          Log in
+                        </Button>
+                      </DialogClose>
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <h1>You can comment </h1>
+                  </div>
+                )}
               </TabsContent>
             </Tabs>
           </section>
