@@ -45,6 +45,7 @@ function App() {
   const [selectedLaunched, setSelectedLaunched] = useState('All region');
   const [activeTab, setActiveTab] = useState('Ideas');
   const [seemoreforIdeas, setSeeMoreForIdeas] = useState(5);
+  const [gettingData, setGettingData] = useState(false);
   const handleIdeasSelect = (value) => {
     setSelectedIdea(value);
   };
@@ -81,8 +82,10 @@ function App() {
     });
   });
   useEffect(() => {
+    setGettingData(true);
     fetchdata().then((elements) => {
       setdata(elements);
+      setGettingData(false);
     });
   }, [seemoreforIdeas]);
   useEffect(() => {
@@ -144,6 +147,7 @@ function App() {
     changeOptionDivState,
   };
   const IdeaValue = {
+    gettingData,
     data,
     votedown,
     voteup,
@@ -169,7 +173,11 @@ function App() {
     {
       label: 'InProgress',
       value: 'InProgress',
-      desc: <InProgess />,
+      desc: (
+        <IdeaContext.Provider value={IdeaValue}>
+          <InProgess />
+        </IdeaContext.Provider>
+      ),
     },
     {
       label: 'Ideas',

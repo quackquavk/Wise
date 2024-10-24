@@ -16,7 +16,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 
-function LaunchedContent({ item, voteup, votedown }) {
+function InProgressContent({ item, voteup, votedown }) {
   const { id, title, body, vote } = item;
 
   const [loading, setLoading] = useState(false);
@@ -56,9 +56,9 @@ function LaunchedContent({ item, voteup, votedown }) {
       <DialogTrigger>
         <div
           key={id}
-          className=' relative py-5 mr-10 px-5 group hover:bg-need-light-green transition-colors duration-700 ease-in-out hover:cursor-pointer w-[22 rem] min-h-80  rounded-[2.3rem] bg-white flex flex-col justify-between'
+          className=' relative py-3  px-3 group hover:bg-need-light-green transition-colors duration-700 ease-in-out hover:cursor-pointer w-64 min-h-56  rounded-3xl bg-white flex flex-col justify-between'
         >
-          <section className='flex flex-col items-start overflow-y-auto max-h-56'>
+          <section className='flex flex-col items-start overflow-y-auto max-h-36'>
             <Button className='relative  w-20 h-8 px-1 py-1 text-xs bg-need-dark-green/10 text-black shadow-none border font-medium border-black transition-colors duration-700 ease-in-out group-hover:bg-need-light-green'>
               Region
             </Button>
@@ -122,4 +122,4 @@ function LaunchedContent({ item, voteup, votedown }) {
   );
 }
 
-export default LaunchedContent;
+export default InProgressContent;

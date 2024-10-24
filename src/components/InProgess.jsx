@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import LaunchedContent from './LaunchedContent';
-
+import InProgressContent from './InProgeressContent';
+import { IdeaContext } from '@/App';
 function InProgess() {
-  const [inprogessContent, setinprogessContent] = useState(false);
+  const [inprogessContent, setinprogessContent] = useState(true);
   const ToggleLaunchDiv = () => {
     setinprogessContent(!inprogessContent);
   };
+  const { data, voteup, votedown } = useContext(IdeaContext);
   return (
     <>
       {!inprogessContent && (
@@ -47,21 +49,38 @@ function InProgess() {
             </h1>
           </div>
           <div
-            className={`rounded-br-3xl transition-all duration-700 ease-in-out rounded-bl-3xl pl-10 py-14 bg-border-color w-full  grid grid-cols-1 gap-y-4 xl:grid-cols-4 lg:gap-y-6 lg:gap-x-2 sm:grid-cols-2${
+            className={`rounded-br-3xl transition-all duration-700 ease-in-out rounded-bl-3xl pl-3 py-14 bg-need-dark-green/10 w-full  grid grid-cols-1 gap-y-4 xl:grid-cols-4 lg:gap-y-6 lg:gap-x-2 sm:grid-cols-2${
               inprogessContent ? 'h-auto' : 'h-0 overflow-hidden'
             }`}
           >
-            <div className='w-full col-span-2  '>
-              <h1 className='font-medium text-xl'>Now</h1>
+            <div className='w-full col-span-2 flex flex-col items-center  '>
+              <h1 className='pl-6 font-medium text-xl text-start w-full mb-10'>
+                Now
+              </h1>
+              <div className='grid grid-cols-2 gap-y-10 gap-x-5'>
+                {data.map((item) => (
+                  <InProgressContent
+                    key={item.id}
+                    item={item}
+                    voteup={voteup}
+                    votedown={votedown}
+                  />
+                ))}{' '}
+              </div>
+
               <div className='grid grid-cols-2'></div>
             </div>
-            <div className='w-full  border-l border-black px-5'>
-              <h1 className='font-medium text-xl'>Next</h1>
-            </div>
-            <div className='w-full'>
-              <h1 className='font-medium text-xl border-l border-black px-5'>
+            <div className='w-full  border-l border-border-color flex flex-col items-center'>
+              <h1 className='pl-6 font-medium text-xl w-full text-start'>
                 Next
               </h1>
+              <div className='grid grid-cols-1 gap-y-10 '></div>
+            </div>
+            <div className=' w-full flex flex-col items-center'>
+              <h1 className='pl-6 font-medium text-xl border-l border-border-color px-5 w-full text-start h-full'>
+                Later
+              </h1>
+              <div className='grid grid-cols-1 gap-y-10'></div>
             </div>
           </div>
         </section>

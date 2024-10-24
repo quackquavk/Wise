@@ -14,6 +14,7 @@ function Idea() {
     increaseMore,
     decreaseMore,
     seemoreforIdeas,
+    gettingData,
   } = useContext(IdeaContext);
   const { selectedIdea } = useContext(SelectContext);
   return (
@@ -37,9 +38,9 @@ function Idea() {
             className=' hover:bg-need-light-green hover:border-none bg-white text-need-dark-green border p-2 sm:h-12 sm:w-40 sm:p-4 rounded-[2rem] text-xs sm:text-base border-need-dark-green shadow-none'
             onClick={increaseMore}
           >
-            See more ideas
+            {gettingData ? 'Loading...' : 'See more ideas'}
           </Button>
-          {seemoreforIdeas > 6 && (
+          {seemoreforIdeas > 6 && !gettingData && (
             <>
               <Button
                 onClick={decreaseMore}
