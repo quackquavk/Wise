@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Button } from './ui/button';
-import { Toggle } from './ui/toggle';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as HeartRegular } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as HeartSolid } from '@fortawesome/free-solid-svg-icons';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+
 import Spinner from './Spinner';
 import {
   Dialog,
@@ -115,7 +116,22 @@ function LaunchedContent({ item, voteup, votedown }) {
           </div>
         </div>
         <div className='bg-white p-5 rounded-br-[2.5rem] rounded-bl-[2.5rem]'>
-          <Button variant='ghost'>About</Button>
+          <Tabs defaultValue='About' className='w-full'>
+            <TabsList className='mb-10 w-full justify-start '>
+              <TabsTrigger className='rounded-none' value='About'>
+                About
+              </TabsTrigger>
+              <TabsTrigger className='rounded-none' value='Comments'>
+                Comments
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value='About'>
+              Make changes to your account here.
+            </TabsContent>
+            <TabsContent value='Comments'>
+              Change your password here.
+            </TabsContent>
+          </Tabs>
         </div>
       </DialogContent>
     </Dialog>
