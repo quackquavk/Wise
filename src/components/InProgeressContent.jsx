@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
 import { Button } from './ui/button';
 import { Toggle } from './ui/toggle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -58,7 +60,7 @@ function InProgressContent({ item, voteup, votedown }) {
           key={id}
           className=' relative py-3  px-3 group hover:bg-need-light-green transition-colors duration-700 ease-in-out hover:cursor-pointer w-64 min-h-56  rounded-3xl bg-white flex flex-col justify-between'
         >
-          <section className='flex flex-col items-start overflow-y-auto max-h-36'>
+          <section className='flex flex-col items-start overflow-y-clip max-h-36'>
             <Button className='relative  w-20 h-8 px-1 py-1 text-xs bg-need-dark-green/10 text-black shadow-none border font-medium border-black transition-colors duration-700 ease-in-out group-hover:bg-need-light-green'>
               Region
             </Button>
@@ -115,7 +117,22 @@ function InProgressContent({ item, voteup, votedown }) {
           </div>
         </div>
         <div className='bg-white p-5 rounded-br-[2.5rem] rounded-bl-[2.5rem]'>
-          <Button variant='ghost'>About</Button>
+          <Tabs defaultValue='About' className='w-full'>
+            <TabsList className='mb-10 w-full justify-start '>
+              <TabsTrigger className='rounded-none' value='About'>
+                About
+              </TabsTrigger>
+              <TabsTrigger className='rounded-none' value='Comments'>
+                Comments
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value='About'>
+              Make changes to your account here.
+            </TabsContent>
+            <TabsContent value='Comments'>
+              Change your password here.
+            </TabsContent>
+          </Tabs>
         </div>
       </DialogContent>
     </Dialog>

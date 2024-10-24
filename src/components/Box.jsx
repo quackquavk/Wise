@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Spinner from './Spinner';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   Dialog,
@@ -200,10 +201,24 @@ function Box({ changeLoginDivState, DivpopUp, item, voteup, votedown }) {
           </section>
         </div>
         <div className=' rounded-br-3xl rounded-bl-3xl bg-white'>
-          <section className='p-5 pl-10'>
-            <h1>About</h1>
+          <section className='p-5 pl-5'>
+            <Tabs defaultValue='About' className='w-full'>
+              <TabsList className='mb-10 w-full justify-start '>
+                <TabsTrigger className='rounded-none' value='About'>
+                  About
+                </TabsTrigger>
+                <TabsTrigger className='rounded-none' value='Comments'>
+                  Comments
+                </TabsTrigger>
+              </TabsList>
+              <TabsContent value='About'>
+                <div className=''>{body}</div>
+              </TabsContent>
+              <TabsContent value='Comments'>
+                Change your password here.
+              </TabsContent>
+            </Tabs>
           </section>
-          <div className='p-10'>{body}</div>
         </div>
         <div />
       </DialogContent>
