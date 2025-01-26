@@ -45,7 +45,6 @@ function LaunchedContent({ item, voteup, votedown }) {
       //   setdatastatedown('off');
       // }
 
-      console.log('up');
     } else {
       setLoading(true);
       setTimeout(() => {
@@ -55,7 +54,6 @@ function LaunchedContent({ item, voteup, votedown }) {
         voteup(id);
       }, 1500);
 
-      console.log('down');
     }
   };
   return (

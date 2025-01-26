@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button } from './ui/button';
-
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import {
@@ -13,19 +12,53 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-
 import { useAuth } from './authContext';
 
 function SideBox({ changeLoginDivState, updateData }) {
-  const { userLoggedIn } = useAuth();
-  const [input, setInput] = useState('');
-  const [text, setText] = useState('');
-  const handleSubmit = (e) => {
+  const { userLoggedIn, token } = useAuth();
+  const [title, setTitle] = useState('');
+  const [description, setText] = useState('');
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    updateData(new Date().getTime().toString(), input, text);
-    setInput('');
-    setText('');
+    setError('');
+
+    // Basic validation
+    if (description.length < 20) {
+      setError('Description must be at least 20 characters long');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:8080/api/ideas', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          title,
+          description
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("upload completed", data)
+        updateData(data.id, title, description);
+        setTitle('');
+        setText('');
+      } else {
+        const errorData = await response.json();
+        setError(errorData.error || 'Failed to submit idea');
+      }
+    } catch (error) {
+      setError('Network error occurred');
+      console.error('Failed to submit idea:', error);
+    }
   };
+
   return (
     <>
       {userLoggedIn && (
@@ -41,15 +74,15 @@ function SideBox({ changeLoginDivState, updateData }) {
           <p className='text-white mt-5 sm:text-base text-sm'>
             Have an idea to improve our product? Share it with our product team
           </p>
-          <Sheet className=''>
+          <Sheet>
             <SheetTrigger asChild>
-              <Button className='bg-need-dark-green  text-need-light-green border-need-light-green border-2 mt-5 mb-1 sm:p-5 p-3 text-xs sm:text-sm hover:brightness-125'>
+              <Button className='bg-need-dark-green text-need-light-green border-need-light-green border-2 mt-5 mb-1 sm:p-5 p-3 text-xs sm:text-sm hover:brightness-125'>
                 Submit an Idea
               </Button>
             </SheetTrigger>
 
-            <SheetContent className=''>
-              <SheetHeader className='p-0 flex justify-center  bg-need-dark-green h-1/5  rounded-tl-3xl'>
+            <SheetContent>
+              <SheetHeader className='p-0 flex justify-center bg-need-dark-green h-1/5 rounded-tl-3xl'>
                 <SheetTitle className='text-need-light-green pl-10'>
                   Tell us your idea!
                 </SheetTitle>
@@ -59,35 +92,35 @@ function SideBox({ changeLoginDivState, updateData }) {
                 <form onSubmit={handleSubmit}>
                   <h1>One sentence that summarises your idea</h1>
                   <Input
-                    value={input}
-                    onChange={(e) => {
-                      setInput(e.target.value);
-                    }}
-                    className='mt-5 border-border-color border-2 '
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    className='mt-5 border-border-color border-2'
+                    required
                   />
                   <h1 className='mt-5'>
-                    Why your idea is useful, who should benefit and how it
-                    should work?
+                    Why your idea is useful, who should benefit and how it should work?
                   </h1>
                   <textarea
-                    name=''
-                    id=''
-                    value={text}
-                    onChange={(e) => {
-                      setText(e.target.value);
-                    }}
+                    value={description}
+                    onChange={(e) => setText(e.target.value)}
                     style={{ overflow: 'auto', whiteSpace: 'pre-wrap' }}
-                    className='mt-5 w-full rounded-lg sm:h-[200px] h-32 border-2 resize-none border-border-color '
-                  ></textarea>
+                    className='mt-5 w-full rounded-lg sm:h-[200px] h-32 border-2 resize-none border-border-color'
+                    required
+                    minLength={20}
+                  />
+                  {error && (
+                    <div className="text-red-500 mt-2 text-sm">
+                      {error}
+                    </div>
+                  )}
                   <h1 className='mt-5'>
-                    Once reviewed it will show up in the Ideas tab. If it's an
-                    idea we're passionate about we might reach out about it.
+                    Once reviewed it will show up in the Ideas tab. If it's an idea we're passionate about we might reach out about it.
                   </h1>
 
                   <SheetClose>
                     <Button
                       type='submit'
-                      className=' mt-5 bg-need-light-green text-need-dark-green'
+                      className='mt-5 bg-need-light-green text-need-dark-green'
                     >
                       Submit idea
                     </Button>
@@ -128,4 +161,5 @@ function SideBox({ changeLoginDivState, updateData }) {
     </>
   );
 }
+
 export default SideBox;

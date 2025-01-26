@@ -3,20 +3,65 @@ import { Button } from './ui/button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from './authContext';
-import { dosignInwithEmailandPw } from './auth';
 import { dosignInwithGoogle } from './auth';
+
 const LogIn = React.forwardRef(({ changeLoginDivState }, ref) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { userLoggedIn } = useAuth();
-  const handleSubmit = async () => {
+  const { login } = useAuth();
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    
+    // Basic validation
+    if (!email || !password) {
+      setError('Email and password are required');
+      return;
+    }
+
+    if (!email.includes('@')) {
+      setError('Invalid email format');
+      return;
+    }
+
     try {
-      await dosignInwithEmailandPw(email, password);
-      changeLoginDivState(false);
+      console.log("logging in with:", { email, password });
+      const response = await fetch('http://localhost:8080/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.token) {
+        console.log("login success");
+        login(data.token); // Store the token in context and localStorage
+        changeLoginDivState(false);
+      } else {
+        setError(data.error || 'Login failed');
+        console.error('Login failed:', {
+          status: response.status,
+          statusText: response.statusText,
+          error: data
+        });
+      }
     } catch (error) {
-      console.error('LogIn failed', error);
+      setError('Network error occurred');
+      console.error('Login request failed:', {
+        message: error.message,
+        error
+      });
     }
   };
+
   const handleSignInWithGoogle = async () => {
     try {
       await dosignInwithGoogle();
@@ -25,6 +70,7 @@ const LogIn = React.forwardRef(({ changeLoginDivState }, ref) => {
       console.error('Login failed', error);
     }
   };
+
   return (
     <div
       ref={ref}
@@ -38,6 +84,11 @@ const LogIn = React.forwardRef(({ changeLoginDivState }, ref) => {
         icon={faXmark}
       />
       <h1 className='font-bold text-lg'>Log In</h1>
+      {error && (
+        <div className="text-red-500 mt-2 text-sm">
+          {error}
+        </div>
+      )}
       <form className='flex flex-col' onSubmit={handleSubmit}>
         <input
           className='mt-10 border-b-2 p-2 pl-4 border-need-dark-green text-need-dark-green placeholder:text-need-dark-green'
@@ -64,12 +115,7 @@ const LogIn = React.forwardRef(({ changeLoginDivState }, ref) => {
           Log In
         </Button>
       </form>
-      <Button
-        onClick={handleSignInWithGoogle}
-        className=' bg-need-light-green text-need-dark-green mt-10 w-full p-6'
-      >
-        Log in with Google
-      </Button>
+
     </div>
   );
 });

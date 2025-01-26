@@ -2,19 +2,40 @@ import React, { useState } from 'react';
 import { Button } from './ui/button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { docreateUserwithEmailandPw } from './auth';
 import { dosignInwithGoogle } from './auth';
+
 function Register({ changeRegisterDivState }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const handleSubmit = async () => {
+  const [username, setUsername] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      await docreateUserwithEmailandPw(email, password);
-      changeRegisterDivState();
+      console.log("registering")
+      const response = await fetch('http://localhost:8080/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          email,
+          password,
+        }),
+      });
+
+      if (response.ok) {
+        console.log("register success")
+        changeRegisterDivState();
+      } else {
+        console.error('Registration failed');
+      }
     } catch (error) {
-      console.error('register failed', error);
+      console.error('Registration failed', error);
     }
   };
+
   const handleSignInWithGoogle = async (e) => {
     e.preventDefault();
     try {
@@ -24,6 +45,7 @@ function Register({ changeRegisterDivState }) {
       console.error('Register failed', error);
     }
   };
+
   return (
     <div className=' bg-white flex flex-col shadow-md items-center mt-10 text-need-dark-green p-48 relative'>
       <FontAwesomeIcon
@@ -33,6 +55,15 @@ function Register({ changeRegisterDivState }) {
       />
       <h1 className='font-bold text-lg'>Register</h1>
       <form className='flex flex-col' onSubmit={handleSubmit}>
+        <input
+          className='mt-10 border-b-2 p-2 pl-4 border-need-dark-green text-need-dark-green placeholder:text-need-dark-green'
+          type='text'
+          placeholder='Username'
+          value={username}
+          onChange={(e) => {
+            setUsername(e.target.value);
+          }}
+        />
         <input
           className='mt-10 border-b-2 p-2 pl-4 border-need-dark-green text-need-dark-green placeholder:text-need-dark-green'
           type='text'

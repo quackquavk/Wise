@@ -48,7 +48,6 @@ function Box({ changeLoginDivState, DivpopUp, item, voteup, votedown }) {
     if (userLoggedIn) {
       localStorage.setItem(`${id}_datastateup`, datastateup);
     }
-    console.log(datastateup);
   }, [datastateup, userLoggedIn, id]);
   useEffect(() => {
     if (userLoggedIn) {
@@ -80,8 +79,6 @@ function Box({ changeLoginDivState, DivpopUp, item, voteup, votedown }) {
         // if (datastatedown == 'on') {
         //   setdatastatedown('off');
         // }
-
-        console.log('up');
       } else {
         setLoading(true);
         setTimeout(() => {
@@ -91,7 +88,6 @@ function Box({ changeLoginDivState, DivpopUp, item, voteup, votedown }) {
           voteup(id);
         }, 1500);
 
-        console.log('down');
       }
     } else {
       changeLoginDivState(true);
@@ -108,11 +104,9 @@ function Box({ changeLoginDivState, DivpopUp, item, voteup, votedown }) {
           setdatastateup('off');
         }
         votedown(id);
-        console.log('down');
       } else {
         setdatastatedown('off');
         voteup(id);
-        console.log('up');
       }
     } else {
       changeLoginDivState(true);

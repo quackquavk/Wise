@@ -23,6 +23,7 @@ import {
 } from '@/components/ui/dialog';
 import { useAuth } from './authContext';
 import { IdeaContext } from '@/App';
+
 function InProgressContent({ item, voteup, votedown }) {
   const { id, title, body, vote } = item;
   const { userLoggedIn } = useAuth();
@@ -46,7 +47,6 @@ function InProgressContent({ item, voteup, votedown }) {
       //   setdatastatedown('off');
       // }
 
-      console.log('up');
     } else {
       setLoading(true);
       setTimeout(() => {
@@ -56,118 +56,94 @@ function InProgressContent({ item, voteup, votedown }) {
         voteup(id);
       }, 1500);
 
-      console.log('down');
     }
   };
+
   return (
-    <Dialog className=''>
-      <DialogTrigger>
-        <div
-          key={id}
-          className=' relative py-3  px-3 group hover:bg-need-light-green transition-colors duration-700 ease-in-out hover:cursor-pointer w-64 min-h-56  rounded-3xl bg-white flex flex-col justify-between'
-        >
-          <section className='flex flex-col items-start overflow-y-clip max-h-36'>
-            <Button className='relative  w-20 h-8 px-1 py-1 text-xs bg-need-dark-green/10 text-black shadow-none border font-medium border-black transition-colors duration-700 ease-in-out group-hover:bg-need-light-green'>
-              Region
-            </Button>
-            <p className='mt-4 w-full text-left font-normal sm:text-wrap  '>
+    <div className='flex flex-col items-start w-full'>
+      <Dialog>
+        <DialogTrigger asChild>
+          <div className='hover:cursor-pointer'>
+            <h1 className='font-bold text-need-dark-green'>{title}</h1>
+            <p className='text-need-dark-green mt-5'>{body}</p>
+          </div>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className='text-need-dark-green'>
+              {title}
+            </DialogTitle>
+            <DialogDescription className='text-need-dark-green'>
               {body}
-            </p>
-          </section>
-
-          <section className='absolute w-10/12 bottom-5 flex mt-10 justify-between items-center'>
-            <h1 className='text-sm'>Launched on Date</h1>
-            <div className='flex items-center'>
-              <div className='mt-1' onClick={handleToggleUp}>
-                {loading ? (
-                  <Spinner />
-                ) : (
-                  <FontAwesomeIcon
-                    icon={datastateup == 'on' ? HeartSolid : HeartRegular}
-                    className={`text-xl ${
-                      datastateup
-                        ? 'text-need-dark-green'
-                        : 'text-need-dark-green'
-                    }`}
-                  />
-                )}
-              </div>
-              <h1 className='ml-2'>{vote}</h1>
-            </div>
-          </section>
-        </div>
-      </DialogTrigger>
-
-      <DialogContent className=' p-0 m-0'>
-        <div className='bg-need-dark-green mb-0 pt-28 rounded-tr-[2.5rem] rounded-tl-[2.5rem] pb-10 px-5'>
-          <h1 className='text-white mb-0'>Wise Account</h1>
-          <p className='text-xl mt-5 text-need-light-green font-bold'>{body}</p>
-          <div className='flex justify-end mt-5 '>
-            <div className='mr-5' onClick={handleToggleUp}>
-              {loading ? (
-                <Spinner
-                  classname={'text-need-dark-green fill-need-light-green'}
-                />
-              ) : (
-                <FontAwesomeIcon
-                  icon={datastateup ? HeartSolid : HeartRegular}
-                  className={`text-xl cursor-pointer ${
-                    datastateup
-                      ? 'text-need-light-green'
-                      : 'text-need-light-green'
-                  }`}
-                />
-              )}
-            </div>
-            <h1 className='text-need-light-green font-semibold'>{vote}</h1>
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
+      <div className='flex mt-5'>
+        <div className='flex items-center'>
+          <div
+            onClick={() => {
+              voteup(id);
+            }}
+            className='hover:cursor-pointer'
+          >
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              strokeWidth={1.5}
+              stroke='currentColor'
+              className='w-6 h-6 text-need-dark-green'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d='M4.5 15.75l7.5-7.5 7.5 7.5'
+              />
+            </svg>
+          </div>
+          <h1 className='text-need-dark-green font-bold ml-2'>{vote}</h1>
+          <div
+            onClick={() => {
+              votedown(id);
+            }}
+            className='hover:cursor-pointer'
+          >
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              strokeWidth={1.5}
+              stroke='currentColor'
+              className='w-6 h-6 text-need-dark-green'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d='M19.5 8.25l-7.5 7.5-7.5-7.5'
+              />
+            </svg>
           </div>
         </div>
-        <div className='bg-white p-5 rounded-br-[2.5rem] rounded-bl-[2.5rem]'>
-          <Tabs defaultValue='About' className='w-full'>
-            <TabsList className='mb-10 w-full justify-start '>
-              <TabsTrigger className='rounded-none' value='About'>
-                About
-              </TabsTrigger>
-              <TabsTrigger className='rounded-none' value='Comments'>
-                Comments
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent value='About'>{body}</TabsContent>
-            <TabsContent value='Comments'>
-              {!userLoggedIn ? (
-                <div className='flex bg-need-dark-green/10 rounded-2xl p-5'>
-                  <FontAwesomeIcon
-                    className='text-5xl'
-                    icon={faCircleExclamation}
-                  />
-                  <div className='flex ml-5 items-start flex-col'>
-                    <h1 className='font-normal'>
-                      You need to log in to leave a comment{' '}
-                    </h1>
-                    <DialogClose>
-                      <Button
-                        onClick={() => {
-                          setTimeout(() => {
-                            changeLoginDivState(true);
-                          }, 500);
-                        }}
-                        className='w-16 px-0 border-b border-b-black rounded-none pb-0 bg-inherit shadow-none text-need-dark-green hover:bg-inherit'
-                      >
-                        Log in
-                      </Button>
-                    </DialogClose>
-                  </div>
-                </div>
-              ) : (
-                <div>
-                  <h1>You can comment </h1>
-                </div>
-              )}
-            </TabsContent>
-          </Tabs>
+        <div className='flex items-center ml-5'>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            strokeWidth={1.5}
+            stroke='currentColor'
+            className='w-6 h-6 text-need-dark-green'
+          >
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              d='M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z'
+            />
+          </svg>
+          <h1 className='text-need-dark-green font-bold ml-2'>0</h1>
         </div>
-      </DialogContent>
-    </Dialog>
+      </div>
+    </div>
   );
 }
 

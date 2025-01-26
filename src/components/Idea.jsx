@@ -19,9 +19,8 @@ function Idea() {
   const { selectedIdea } = useContext(SelectContext);
   return (
     <div className='flex flex-col  items-center md:items-start md:flex-row'>
-      {console.log(selectedIdea)}
       {selectedIdea === 'Most popular first' ? (
-        <section className='w-2/3 mb-10'>
+        <section className='w-2/3 mb-10 ' key={data.id}>
           {data
             .sort((a, b) => b.vote - a.vote)
             .map((item) => (
@@ -52,7 +51,7 @@ function Idea() {
           )}
         </section>
       ) : (
-        <section className='w-2/3'>
+        <section className='w-2/3' key={data.id}>
           {data.map((item) => (
             <Box
               key={item.id}

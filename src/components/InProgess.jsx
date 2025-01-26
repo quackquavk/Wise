@@ -57,7 +57,7 @@ function InProgess() {
               <h1 className='pl-6 font-medium text-xl text-start w-full mb-10'>
                 Now
               </h1>
-              <div className='grid grid-cols-2 gap-y-10 gap-x-5'>
+              <div className='grid grid-cols-2 gap-y-10 gap-x-5' key={data.id}>
                 {data.map((item) => (
                   <InProgressContent
                     key={item.id}

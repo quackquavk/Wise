@@ -23,6 +23,7 @@ import {
   TabPanel,
 } from '@material-tailwind/react';
 import Selectcompo from './components/Selectcompo';
+import { AuthProvider } from './components/authContext';
 export const LogContext = createContext(null);
 export const IdeaContext = createContext(null);
 export const LaunchedContext = createContext(null);
@@ -96,19 +97,16 @@ function App() {
 
   const voteup = (id) => {
     const newArray = data.map((item) => {
-      console.log(item);
       if (item.id == id) {
         return { ...item, vote: item.vote + 1 };
       } else {
         return item;
       }
     });
-    console.log(newArray);
     setdata(newArray);
   };
   const votedown = (id) => {
     const newArray = data.map((item) => {
-      console.log(item);
       if (item.id == id) {
         // localStorage.setItem(item.id, (item.vote - 1).toString());
         return { ...item, vote: item.vote - 1 };
@@ -116,7 +114,6 @@ function App() {
         return item;
       }
     });
-    // console.log(newArray);
 
     setdata(newArray);
   };
@@ -131,6 +128,7 @@ function App() {
   };
   const changeRegisterDivState = () => {
     setregisterDiv(!registerDiv);
+    setloginDiv(true);
   };
   const changeOptionDivState = (state) => {
     setOptionStatus(state);
@@ -202,67 +200,69 @@ function App() {
   ];
 
   return (
-    <section className='relative'>
-      {optionStatus && (
-        <LogContext.Provider value={LogValues}>
-          <Option />
-        </LogContext.Provider>
-      )}
-      {loginDiv && (
-        <div
-          ref={scrollLogin}
-          className='flex justify-center items-center w-full h-[100vh] z-30'
-        >
-          <LogIn ref={scrollLogin} changeLoginDivState={changeLoginDivState} />
-        </div>
-      )}
-      {registerDiv && (
-        <div className='flex justify-center items-center w-full h-[100vh] z-30'>
-          <Register changeRegisterDivState={changeRegisterDivState} />
-        </div>
-      )}
-      <LogContext.Provider value={LogValues}>
-        {!(loginDiv || registerDiv) && <Hero></Hero>}
-      </LogContext.Provider>
-      <div className='mt-20'></div>
-
-      <div className=' mt-5 flex lg:flex-row lg:justify-center lg:items-start lg:pl-52 lg:pr-36 px-2 flex-col items-center'>
-        <Tabs className='w-full mt-5' value={activeTab}>
-          <div className='w-full flex justify-between lg:flex-row flex-col items-center'>
-            <TabsHeader
-              className='rounded-none border-b border-blue-gray-50 bg-transparent  p-0 h-16 '
-              indicatorProps={{
-                className:
-                  'bg-transparent border-b-2 border-black shadow-none rounded-none',
-              }}
-            >
-              {tabdata.map(({ label, value }) => (
-                <Tab
-                  key={value}
-                  value={value}
-                  onClick={() => setActiveTab(value)}
-                  className={` text-base hover:cursor-pointer  px-5 ml-2 ${
-                    activeTab === value ? 'font-bold text-need-dark-green' : ''
-                  }`}
-                >
-                  {label}
-                </Tab>
-              ))}
-            </TabsHeader>
-            <SelectContext.Provider value={SelectValue}>
-              <Selectcompo />
-            </SelectContext.Provider>
+    <AuthProvider>
+      <section className='relative'>
+        {optionStatus && (
+          <LogContext.Provider value={LogValues}>
+            <Option />
+          </LogContext.Provider>
+        )}
+        {loginDiv && (
+          <div
+            ref={scrollLogin}
+            className='flex justify-center items-center w-full h-[100vh] z-30'
+          >
+            <LogIn ref={scrollLogin} changeLoginDivState={changeLoginDivState} />
           </div>
-          <TabsBody className='mt-20 w-full'>
-            {tabdata.map(({ value, desc }) => (
-              <TabPanel key={value} value={value}>
-                {desc}
-              </TabPanel>
-            ))}
-          </TabsBody>
-        </Tabs>
-      </div>
-    </section>
+        )}
+        {registerDiv && (
+          <div className='flex justify-center items-center w-full h-[100vh] z-30'>
+            <Register changeRegisterDivState={changeRegisterDivState} />
+          </div>
+        )}
+        <LogContext.Provider value={LogValues}>
+          {!(loginDiv || registerDiv) && <Hero></Hero>}
+        </LogContext.Provider>
+        <div className='mt-20'></div>
+
+        <div className=' mt-5 flex lg:flex-row lg:justify-center lg:items-start lg:pl-52 lg:pr-36 px-2 flex-col items-center'>
+          <Tabs className='w-full mt-5' value={activeTab}>
+            <div className='w-full flex justify-between lg:flex-row flex-col items-center'>
+              <TabsHeader
+                className='rounded-none border-b border-blue-gray-50 bg-transparent  p-0 h-16 '
+                indicatorProps={{
+                  className:
+                    'bg-transparent border-b-2 border-black shadow-none rounded-none',
+                }}
+              >
+                {tabdata.map(({ label, value }) => (
+                  <Tab
+                    key={value}
+                    value={value}
+                    onClick={() => setActiveTab(value)}
+                    className={` text-base hover:cursor-pointer  px-5 ml-2 ${
+                      activeTab === value ? 'font-bold text-need-dark-green' : ''
+                    }`}
+                  >
+                    {label}
+                  </Tab>
+                ))}
+              </TabsHeader>
+              <SelectContext.Provider value={SelectValue}>
+                <Selectcompo />
+              </SelectContext.Provider>
+            </div>
+            <TabsBody className='mt-20 w-full'>
+              {tabdata.map(({ value, desc }) => (
+                <TabPanel key={value} value={value}>
+                  {desc}
+                </TabPanel>
+              ))}
+            </TabsBody>
+          </Tabs>
+        </div>
+      </section>
+    </AuthProvider>
   );
 }
 
