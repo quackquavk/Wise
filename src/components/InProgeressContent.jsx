@@ -1,16 +1,16 @@
 import React, { useContext, useState } from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+// import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-import { Button } from './ui/button';
-import { Toggle } from './ui/toggle';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart as HeartRegular } from '@fortawesome/free-regular-svg-icons';
-import {
-  faHeart as HeartSolid,
-  faCircleExclamation,
-} from '@fortawesome/free-solid-svg-icons';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import Spinner from './Spinner';
+// import { Button } from './ui/button';
+// import { Toggle } from './ui/toggle';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faHeart as HeartRegular } from '@fortawesome/free-regular-svg-icons';
+// import {
+//   faHeart as HeartSolid,
+//   faCircleExclamation,
+// } from '@fortawesome/free-solid-svg-icons';
+// import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+// import Spinner from './Spinner';
 import {
   Dialog,
   DialogClose,
@@ -26,8 +26,8 @@ import { IdeaContext } from '@/App';
 
 function InProgressContent({ item, voteup, votedown }) {
   const { id, title, body, vote } = item;
-  const { userLoggedIn } = useAuth();
-  const { changeLoginDivState } = useContext(IdeaContext);
+  // const { userLoggedIn } = useAuth();
+  // const { changeLoginDivState } = useContext(IdeaContext);
   const [loading, setLoading] = useState(false);
   const [datastateup, setdatastateup] = useState();
 

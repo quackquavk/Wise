@@ -47,6 +47,24 @@ function App() {
   const [activeTab, setActiveTab] = useState('Ideas');
   const [seemoreforIdeas, setSeeMoreForIdeas] = useState(5);
   const [gettingData, setGettingData] = useState(false);
+
+  // Handle OAuth callback
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+    const error = params.get('error');
+
+    if (token) {
+      console.log('OAuth callback detected at App level');
+      // Clean up URL immediately to prevent duplicate processing
+      window.history.replaceState({}, document.title, window.location.pathname);
+      // Close login dialog if it's open
+      setloginDiv(false);
+    } else if (error) {
+      console.error('OAuth error:', decodeURIComponent(error));
+    }
+  }, []);
+
   const handleIdeasSelect = (value) => {
     setSelectedIdea(value);
   };

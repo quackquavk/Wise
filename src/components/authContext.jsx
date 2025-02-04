@@ -8,6 +8,18 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  // Check for token in URL on mount
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const urlToken = params.get('token');
+    
+    if (urlToken) {
+      login(urlToken);
+      // Clean up URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, []);
+
   // Function to fetch user details
   const fetchUserDetails = async (authToken) => {
     try {
@@ -42,6 +54,7 @@ export const AuthProvider = ({ children }) => {
   }, [token]);
 
   const login = async (newToken) => {
+    console.log("logging in with:", newToken)
     setLoading(true);
     try {
       localStorage.setItem('token', newToken);
